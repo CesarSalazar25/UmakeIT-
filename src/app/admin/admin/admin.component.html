@@ -1,0 +1,21 @@
+<!--SIDE BAR -->
+<ul class="nav nav-tabs" *ngIf="auth.User | async as user">
+    <li class="nav-item">
+        <a class="nav-link active" href="home" *ngIf="user.role =='admin'">Administrar tienda</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane container fade">
+        <form class="xs">
+        </form>
+    </div>
+</div>

@@ -1,4 +1,8 @@
-# TuPedido
+# UmakeIT!
+
+Proyecto para la materia de Sistemas de la Información, sobre una aplicación web para un servicio de compra de comida por internet, hecho en Angular 6, Bootstrap y Firestore.
+
+Integrantes: César Salazar, Luis González, Carlos de Castro.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 

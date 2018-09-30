@@ -1,0 +1,88 @@
+<!-- Determina si el usuario esta autenticado o es un invitado-->
+<div *ngIf="auth.User | async; then authenticated else guest">
+
+</div>
+<!-- Se usa el #authenticated o #guest para renderisar el template dependiendo de la respuesta del servicio auth de firestore -->
+<!-- Esto con tal de poder hacer uso de una navegación basada en roles-->
+
+
+<!--Template para usuario autenticado-->
+<ng-template #authenticated>
+
+    <!--Identificar el usuario-->
+    <div *ngIf="auth.User | async as User">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark rounded">
+            <div class="container">
+                <a id="nText" class="navbar-brand">Nombre empresa</a>
+                <!--data-toggle para volver al navbar responsive-->
+                <button class="navbar-toggler " type="button " (click)="toggleNavbar() ">
+                        <span class="navbar-toggler-icon "></span>
+                </button>
+                <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen }">
+                    <ul class="navbar-nav mr-auto">
+                        <!-- Se cambia el navbar dependiendo del rol del usuario-->
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" [routerLink]="['/shop']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" *ngIf="User.role === 'customer'" [routerLink]="['/orders']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" *ngIf="User.role === 'admin'" [routerLink]="['/admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" *ngIf="User.role === 'customer'" [routerLink]="['/shop']" routerLinkActive="active">Carrito</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="dropdown" dropdown>
+                            <div class="btn-group" dropdown>
+                                <button type="button" class="btn btn-dark">Nombre Usuario</button>
+                                <button id="button-split" type="button" dropdownToggle class="btn btn-dark dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+                                      <span class="caret"></span>
+                                      <span class="sr-only">Split button!</span>
+                                    </button>
+                                <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
+                                    <li role="menuitem"><a class="dropdown-item " href="#">Perfil</a></li>
+                                    <li class="divider dropdown-divider"></li>
+                                    <li role="menuitem"><a class="dropdown-item" href="#">Carrito</a></li>
+                                    <li class="divider dropdown-divider"></li>
+                                    <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li class="divider dropdown-divider"></li>
+                                    <li role="menuitem"><a class="dropdown-item" href="#" (click)="auth.signOut()">Salir</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</ng-template>
+<!--Template para invitados-->
+<ng-template #guest>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark rounded ">
+        <div class="container ">
+            <a id="nText " class="navbar-brand ">Nombre Empresa</a>
+            <button class="navbar-toggler " type="button " (click)="toggleNavbar() ">
+                    <span class="navbar-toggler-icon "></span>
+            </button>
+            <div class="collapse navbar-collapse " [ngClass]="{ 'show': navbarOpen } ">
+                <ul class="navbar-nav mr-auto ">
+                    <li class="nav-item ">
+                        <a class="nav-item nav-link " [routerLink]="[ '/shop'] " routerLinkActive="active " [routerLinkActiveOptions]="{exact: true} ">Tienda</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto ">
+                    <li class="nav-item ">
+                        <a class="nav-link " [routerLink]="[ '/login'] " routerLinkActive="active " [routerLinkActiveOptions]="{exact: true} ">Login</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " [routerLink]="[ '/register'] " routerLinkActive="active " [routerLinkActiveOptions]="{exact: true} ">Registro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</ng-template>

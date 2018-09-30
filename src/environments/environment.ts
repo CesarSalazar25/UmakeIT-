@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyC9ZcTSf8BIpPjFgZvvcA3o79fk3lAyFdo",
+    authDomain: "tupedido-backend.firebaseapp.com",
+    databaseURL: "https://tupedido-backend.firebaseio.com",
+    projectId: "tupedido-backend",
+    storageBucket: "tupedido-backend.appspot.com",
+    messagingSenderId: "96438007832"
+  }
 };
 
 /*

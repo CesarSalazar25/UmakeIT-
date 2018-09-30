@@ -1,0 +1,36 @@
+
+<div class="login-box">
+        <img src="https://firebasestorage.googleapis.com/v0/b/tupedido-backend.appspot.com/o/Im%C3%A1genes%2Flogo_1.png?alt=media&token=47cfb758-44bc-4043-ae17-710de7beb747" class="avatar" alt="Avatar Image">
+        <h1>Accede a UmakeIT!</h1>
+        <form (ngSubmit)="login(f)" #f="ngForm" novalidate="">
+
+          <!-- Introduce email -->
+            <!--Validaciones para verificar que el correo cumple el formato-->
+          <input type="text" id="email" name="email" class="form-control" #email="ngModel" ngModel
+          [ngClass]= "{'is-invalid':email.errors!=null && email.touched, 'is-valid':email.errors==null}" 
+          required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Correo electrónico">
+            <!--Se enmarca ligeramente en verde si se cumple con el formato válido-->
+            <div *ngIf="email.valid" class="valid-feedback"></div> 
+            <hr>
+            
+          <!-- Introduce password -->
+          <!--Validaciones para verificar que el password cumple el formato-->
+          <input type="password" class="form-control" id="password" name="password" #password="ngModel" ngModel placeholder="Password"
+          [ngClass]= "{'is-invalid':password.errors!=null && password.touched, 'is-valid':password.errors==null}" required minlength="6">
+            <!--Se enmarca ligeramente en verde si se cumple con el formato válido-->
+            <div *ngIf="email.valid" class="valid-feedback"></div>
+            <hr>
+            <!--Submit para iniciar sesión con correo electrónico-->
+            <input type="submit" value="Acceder" [disabled]="!f.valid">
+            
+            <p>ó</p>
+
+          <button type="button" (click)="auth.googleLogin()" class="btn btn-google">
+                <i class="fa fa-google pr-1" ></i> Google
+            </button>
+            <hr>
+          <a [routerLink]="['/register']" routerLinkActive="active">¿Olvidaste tu contraseña?</a><br>
+          <a [routerLink]="['/register']" routerLinkActive="active">¿No tienes una cuenta?</a>
+          <hr>
+        </form>
+</div>
