@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +6,5 @@ import { Component, ViewContainerRef } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-
-  constructor(
-    public vcr: ViewContainerRef
-  ){
-  }
-  
+  title = 'UmakeIT';
 }

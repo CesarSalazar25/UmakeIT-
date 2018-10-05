@@ -4,6 +4,7 @@
         <p>¡Únase ya! ¡Las mejores comidas de Venezuela lo están esperando!</p>
         <form (ngSubmit)="onSignup(f)" #f="ngForm" novalidate="">
 
+
           <!-- Introduce email -->
             <!--Validaciones para verificar que el correo cumple el formato-->
         <div class="form-group formlogin">
@@ -40,6 +41,13 @@
             <!--Se enmarca ligeramente en verde si se cumple con el formato válido-->
             <div *ngIf="email.valid" class="valid-feedback"></div>
         </div>    
+            <hr>
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" required name="acepta" [(ngModel)]="usuario.acepta" #acepta>
+                    <label class="custom-control-label" for="customCheck1"><small>He leído y acepto los términos y condiciones.</small></label>
+                </div>
+
             <hr>
             <!--Submit para iniciar sesión con correo electrónico-->
             <input type="submit" value="Registrarse" [disabled]="!f.valid">

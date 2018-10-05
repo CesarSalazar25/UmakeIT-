@@ -1,10 +1,10 @@
 # UmakeIT!
 
-Proyecto para la materia de Sistemas de la Informaci√≥n, sobre una aplicaci√≥n web para un servicio de compra de comida por internet, hecho en Angular 6, Bootstrap y Firestore.
+ Proyecto para la materia de Sistemas de la InformaciÛn, sobre una aplicaciÛn web para un servicio de compra de comida por internet, hecho en Angular 6, Bootstrap y Firestore.
 
-Integrantes: C√©sar Salazar, Luis Gonz√°lez, Carlos de Castro.
+Integrantes: CÈsar Salazar, Luis Gonz·lez, Carlos de Castro. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
 
 ## Development server
 
@@ -29,4 +29,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# UmakeIT-

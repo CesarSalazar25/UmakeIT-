@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+//Firebase:
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { auth } from 'firebase/app';
 
-import {switchMap} from 'rxjs/operators';
-import * as firebase from "firebase";
+//Modelos:
 import { User } from "../models/user";
+
+//Observables:
+import {switchMap} from 'rxjs/operators';
 import { Observable , of} from 'rxjs';
 
 
@@ -14,6 +18,7 @@ import { Observable , of} from 'rxjs';
 export class AuthService {
   
   User: Observable<User>;
+  
 
   constructor (
     public afAuth: AngularFireAuth,
@@ -40,7 +45,7 @@ export class AuthService {
   //Método para usar el inicio de sesión con Google:
   public googleLogin() 
   {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
 
@@ -61,12 +66,12 @@ export class AuthService {
             role: 'admin'
           }
           this.firestore.collection('users').doc(user.uid).set(newUser).then(() => {
-            this.router.navigate(['/shop']);
+            this.router.navigate(['/dashboard']);
             return;
           })
         }
       })
-      this.router.navigate(['/shop']);
+      this.router.navigate(['/dashboard']);
     })
   }
   

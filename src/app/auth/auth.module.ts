@@ -3,21 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthService } from './auth.service';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { RegisterComponent } from './register/register.component';
-import { SharedModule } from '../shared/shared.module';
 import { FormsModule, } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   imports: [
     CommonModule,
     AuthRoutingModule,
     AngularFireAuthModule,
-    SharedModule,
     FormsModule
   ],
   declarations: [RegisterComponent, LoginComponent],
-  providers: [AuthService]
+  providers: [AuthService, AuthGuard]
 })
 export class AuthModule { }

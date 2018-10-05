@@ -2,52 +2,48 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, } from '@angular/forms';
 import { HttpModule } from '@angular/http'
+import { environment } from '../environments/environment';
 
-import { APP_ROUTING } from './app.routes';
 import { AppComponent } from './app.component';
-import {environment} from '../environments/environment'
 
-//FireBase Module
-import {AngularFireModule} from 'angularfire2';
-import{AngularFirestoreModule} from 'angularfire2/firestore';
-
-//Modulos de la aplicación
-import { AuthModule } from './auth/auth.module';
-//import { AdminModule } from './admin/admin.module';
-
-//Componentes
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+//Componentes:
 import { NavbarComponent } from './components/navbar/navbar.component';
-
-//Modulos de ngx-boostrap
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { AlertModule } from 'ngx-bootstrap';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { CollapseModule } from 'ngx-bootstrap/collapse'
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ShopComponent } from './components/shop/shop.component';
+
+//Router:
+import { APP_ROUTING } from './app.routes';
+
+//Módulos:
+import { AuthModule } from './auth/auth.module';
+
+//Servicios:
+
+//Pipes:
+
+//Firebase:
+import { AngularFireModule } from '@angular/fire';
+import{ AngularFirestoreModule } from '@angular/fire/firestore';
+
+//Ngx-Bootstrap:
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     NavbarComponent,
+    DashboardComponent,
     ShopComponent
   ],
   imports: [
-    BsDropdownModule.forRoot(),
-    AlertModule.forRoot(),
-    CarouselModule.forRoot(),
-    CollapseModule.forRoot(),
-    ModalModule.forRoot(),
     BrowserModule,
-    APP_ROUTING,
+    AuthModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    APP_ROUTING,
     AngularFirestoreModule,
-    AuthModule
-    //AdminModule
+    TooltipModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]
