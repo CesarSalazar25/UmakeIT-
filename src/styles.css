@@ -5,8 +5,8 @@ body
 {
     margin: 0;
     padding: 0;
-    background: url(https://firebasestorage.googleapis.com/v0/b/tupedido-backend.appspot.com/o/Im%C3%A1genes%2Ffondo_2_1.jpg?alt=media&token=090cc435-24e3-460d-a77b-caa2900c9305) no-repeat center top;
+    background: url("/assets/img/fondo.jpg") no-repeat center top;
     background-size: cover;
-    font-family: sans-serif;
     height: 100vh;
+    /*font-family: sans-serif;*/
 }

@@ -1,5 +1,5 @@
 <div class="login-box">
-        <img src="https://firebasestorage.googleapis.com/v0/b/tupedido-backend.appspot.com/o/Im%C3%A1genes%2Flogo_1.png?alt=media&token=47cfb758-44bc-4043-ae17-710de7beb747" class="avatar" alt="Avatar Image">
+        <img src="/assets/img/logo.png" class="avatar" alt="Avatar Image">
         <h1>Registro</h1>
         <p>¡Únase ya! ¡Las mejores comidas de Venezuela lo están esperando!</p>
         <form (ngSubmit)="onSignup(f)" #f="ngForm" novalidate="">
@@ -43,15 +43,14 @@
         </div>    
             <hr>
 
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1" required name="acepta" [(ngModel)]="usuario.acepta" #acepta>
+                <!--div class="custom-control custom-checkbox"-->
+                    <!--input type="checkbox" class="custom-control-input" id="customCheck1" required name="acepta" [(ngModel)]="usuario.acepta" #acepta>
                     <label class="custom-control-label" for="customCheck1"><small>He leído y acepto los términos y condiciones.</small></label>
                 </div>
 
-            <hr>
+            <hr-->
             <!--Submit para iniciar sesión con correo electrónico-->
             <input type="submit" value="Registrarse" [disabled]="!f.valid">
-            
             
           <a [routerLink]="['/login']" routerLinkActive="active">¿Ya dispone de una cuenta con nosotros?</a>
           <hr>

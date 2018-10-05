@@ -13,20 +13,17 @@ import { ShopComponent } from './components/shop/shop.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
-
 //Módulos:
 import { AuthModule } from './auth/auth.module';
 
 //Servicios:
-
 //Pipes:
 
 //Firebase:
 import { AngularFireModule } from '@angular/fire';
 import{ AngularFirestoreModule } from '@angular/fire/firestore';
 
-//Ngx-Bootstrap:
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
+//Componentes de Ngx-Bootstrap:
 
 @NgModule({
   declarations: [
@@ -42,7 +39,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     HttpModule,
     APP_ROUTING,
     AngularFirestoreModule,
-    TooltipModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
