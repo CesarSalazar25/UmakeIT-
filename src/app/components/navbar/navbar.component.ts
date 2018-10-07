@@ -8,13 +8,6 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
   
-  navbarOpen = false;
-
-  toggleNavbar()
-  {
-    this.navbarOpen = !this.navbarOpen;
-  }
-
   constructor(public auth: AuthService) 
   { 
 

@@ -21,15 +21,22 @@
                 </a>
                 <!-- Se cambia el navbar dependiendo del rol del usuario-->
                 <ul class="navbar-nav mx-auto">
-                <li class="nav-item"> <a class="nav-link" [routerLinkActive]="['login']">Home</a> </li>
+                <li class="nav-item"> <a class="nav-link" [routerLinkActive]="['dashboard']">Home</a> </li>
                 <li class="nav-item"> 
                     <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['/admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a> 
                 </li>
                 <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLinkActive]="['/carrito']">Carrito</a> </li>
                 <li class="nav-item"> 
-                    <a class="nav-link" [routerLink]="['/dashboard/shop']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tienda</a> 
+                    <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Tienda</a> 
                 </li>
                 </ul>
+                <!--Sidebar-->
+                <!--Collapse de NGX-BOOTSTRAP-->
+                <button type="button" class="btn btn-collapse btn-dark"  (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+                    <i *ngIf="!isCollapsed" class="far fa-eye-slash fa-2x"></i>
+                    <i *ngIf="isCollapsed" class="far fa-eye fa-2x"></i>
+                </button>
 
                 <!--Muestra el avatar del usuario si lo tiene, sino muestra uno predefinido-->
                 <!--img class="img-fluid avatar" alighn="middle" *ngIf="User.photoUrl"src="{{User.photoUrl}}"-->
@@ -64,47 +71,9 @@
             </div>
             </div>
         </nav>
-    
-    <!--Sidebar-->
-        <div class="sidebar">
-            <!--Muestra el avatar del usuario si lo tiene, sino muestra uno predefinido-->
-            <div class="name-user">
-                <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
-                <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
-                <!--Nombre-->
-                <br>
-                <b>{{User.name | titlecase}}</b>
-                <hr>
-                <!--Rol de usuario-->
-                <!--Se muestra el rol del usuario con un botón-->
-                <button *ngIf="User.role === 'admin'" type="button" class="btn btn-dark btn-sm diseabled">
-                        <i class="fas fa-user-edit" alighn="middle"></i>
-                        <b>  Administrador</b>
-                </button>
-                <button *ngIf="User.role === 'customer'" type="button" class="btn btn-dark btn-sm diseabled">
-                        <i class="fas fa-user-tie" alighn="middle"></i>
-                        <b>  Cliente</b>
-                </button>
-            </div>
-            <hr>
-            <!--Perfil-->
-            <a>
-                    <i class="fas fa-user-circle fa-2x" alighn="middle"></i>
-                    <b>    Perfil</b>
-            </a>
-            <hr>
-            <!--Pedidos o compras realizadas-->
-            <a *ngIf="User.role === 'customer'">
-                <i class="fas fa-cart-arrow-down fa-2x"></i>
-                <b>    Compras</b>   
-            </a>
-            <hr>
-            <!--Cerrar sesión-->
-            <a (click)="auth.signOut()">
-                <i class="fas fa-sign-out-alt fa-2x"></i>
-                <b>    Salir</b> 
-            </a>
+        <div id="collapseBasic" [collapse]="isCollapsed">
+                <app-sidebar></app-sidebar>
         </div>
-    </div>  
-
+</div>        
 </ng-template>
+

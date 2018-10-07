@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 //Componentes:
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ShopComponent } from './components/shop/shop.component';
 
 //Router:
@@ -40,7 +41,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     AppComponent,
     NavbarComponent,
     DashboardComponent,
-    ShopComponent
+    ShopComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
