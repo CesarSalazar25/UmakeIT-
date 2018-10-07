@@ -16,7 +16,7 @@
                 </button>
                 <div class="navbar-collapse collapse show" id="navbar12"> 
                 <a class="navbar-brand d-none d-md-block" href="#">
-                <img class="img-fluid" alighn="middle" src="/assets/img/logo.png">
+                <img class="img-fluid logo" alighn="middle" src="/assets/img/logo.png">
                 <b><b>UmakeIT!</b></b>
                 </a>
                 <!-- Se cambia el navbar dependiendo del rol del usuario-->
@@ -27,42 +27,84 @@
                 </li>
                 <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLinkActive]="['/carrito']">Carrito</a> </li>
                 <li class="nav-item"> 
-                    <a class="nav-link" [routerLink]="['/shop']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tienda</a> 
+                    <a class="nav-link" [routerLink]="['/dashboard/shop']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tienda</a> 
                 </li>
                 </ul>
+
                 <!--Muestra el avatar del usuario si lo tiene, sino muestra uno predefinido-->
-                <img class="img-fluid" alighn="middle" *ngIf="User.photoUrl"src="{{User.photoUrl}}">
-                <img class="img-fluid" alighn="middle" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
+                <!--img class="img-fluid avatar" alighn="middle" *ngIf="User.photoUrl"src="{{User.photoUrl}}"-->
+                <!--img class="img-fluid" alighn="middle" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png"-->
                 <!--Botón dropdown que implementa NGX-Botstrap-->
-                <div class="btn-group" dropdown>
+                <!--div class="btn-group" dropdown>
                     <button id="button-basic" dropdownToggle type="button" class="btn btn-dark dropdown-toggle"
                         aria-controls="dropdown-basic">{{User.name}} <span class="caret"></span>
                     </button>
                         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                            role="menu" aria-labelledby="button-basic">
+                            role="menu" aria-labelledby="button-basic"-->
                             <!--Perfil-->
-                          <li role="menuitem"><a class="dropdown-item" href="#">
+                          <!--li role="menuitem"><a class="dropdown-item" href="#">
                                 <i class="fas fa-user-circle"></i>
                                 Perfil</a>
-                            </li>
+                            </li-->
                             <!--Pedidos o compras realizadas-->
-                          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/orders']">
+                          <!--li role="menuitem"><a class="dropdown-item" [routerLink]="['/orders']">
                             <i class="fas fa-cart-arrow-down"></i>
                             Compras</a>
-                        </li>
+                        </li-->
                           <!--li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li-->
-                          <li class="divider dropdown-divider"></li>
+                          <!--li class="divider dropdown-divider"></li-->
                           <!--Salir de la sesión-->
-                          <li role="menuitem"><a class="dropdown-item" (click)="auth.signOut()" style="cursor: pointer">
+                          <!--li role="menuitem"><a class="dropdown-item" (click)="auth.signOut()" style="cursor: pointer">
                             <i class="fas fa-sign-out-alt"></i>
                             Salir</a>
                           </li>
-                        </ul>
-                </div>
+                        </ul-->
+                <!--/div-->
 
             </div>
             </div>
         </nav>
+    
+    <!--Sidebar-->
+        <div class="sidebar">
+            <!--Muestra el avatar del usuario si lo tiene, sino muestra uno predefinido-->
+            <div class="name-user">
+                <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
+                <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
+                <!--Nombre-->
+                <br>
+                <b>{{User.name | titlecase}}</b>
+                <hr>
+                <!--Rol de usuario-->
+                <!--Se muestra el rol del usuario con un botón-->
+                <button *ngIf="User.role === 'admin'" type="button" class="btn btn-dark btn-sm diseabled">
+                        <i class="fas fa-user-edit" alighn="middle"></i>
+                        <b>  Administrador</b>
+                </button>
+                <button *ngIf="User.role === 'customer'" type="button" class="btn btn-dark btn-sm diseabled">
+                        <i class="fas fa-user-tie" alighn="middle"></i>
+                        <b>  Cliente</b>
+                </button>
+            </div>
+            <hr>
+            <!--Perfil-->
+            <a>
+                    <i class="fas fa-user-circle fa-2x" alighn="middle"></i>
+                    <b>    Perfil</b>
+            </a>
+            <hr>
+            <!--Pedidos o compras realizadas-->
+            <a *ngIf="User.role === 'customer'">
+                <i class="fas fa-cart-arrow-down fa-2x"></i>
+                <b>    Compras</b>   
+            </a>
+            <hr>
+            <!--Cerrar sesión-->
+            <a (click)="auth.signOut()">
+                <i class="fas fa-sign-out-alt fa-2x"></i>
+                <b>    Salir</b> 
+            </a>
+        </div>
     </div>  
 
 </ng-template>

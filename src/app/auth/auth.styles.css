@@ -2,7 +2,7 @@
 .login-box 
 {
     width: 320px;
-    height: 570px;
+    height: 520px;
     background: #000;
     color: #fff;
     top: 50%;
@@ -12,6 +12,8 @@
     text-align: center;
     box-sizing: border-box;
     padding: 70px 30px;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
   

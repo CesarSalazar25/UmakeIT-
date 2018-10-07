@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AuthRoutingModule } from './auth-routing.module';
-import { AuthService } from './auth.service';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { RegisterComponent } from './register/register.component';
 import { FormsModule, } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
+
+//Router:
+import { AuthRoutingModule } from './auth-routing.module';
+
+//Servicios:
+import { AuthService } from './auth.service';
+
+//Firebase:
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthGuard } from './auth.guard';
+
+//Componentes:
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [

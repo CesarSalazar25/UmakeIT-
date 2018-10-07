@@ -10,8 +10,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ShopComponent } from './components/shop/shop.component';
-import { OrdersComponent } from './components/orders/orders.component';
-import { CarritoComponent } from './components/carrito/carrito.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
@@ -29,6 +27,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 //Componentes de Ngx-Bootstrap:
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { ButtonsModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
@@ -36,9 +40,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AppComponent,
     NavbarComponent,
     DashboardComponent,
-    ShopComponent,
-    OrdersComponent,
-    CarritoComponent
+    ShopComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     HttpModule,
     APP_ROUTING,
     BsDropdownModule.forRoot(),
+    AlertModule.forRoot(),
+    ButtonsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    CollapseModule.forRoot(),
+    ModalModule.forRoot(),
+    TabsModule.forRoot(),
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],

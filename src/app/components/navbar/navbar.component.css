@@ -1,8 +1,33 @@
-.navbar-dark
+/*----------------------------------- NAVBAR --------------------------------*/
+
+/*Para imágenes del Navbar*/
+.avatar, .logo
 {
-    background-color:#151515;
+    width:50px; 
+    height:50px;
+    margin:3px;
+    padding:2px;
+    border-radius: 70%;
 }
 
+.profile-pic
+{
+    width:100px; 
+    height:100px;
+    margin:3px;
+    padding:2px;
+    border-radius: 70%;
+}
+
+/*Color del navbar*/
+.navbar-dark
+{
+    overflow: hidden;
+    background-color:#151515;
+
+}
+
+/*Nombre del proyecto*/
 .navbar-brand
 {
     font-family: 'Segoe Script' /*Otras opciones: sans-serif, Verdana*/;
@@ -12,19 +37,85 @@
     padding:2px;
 }
 
-img
-{
-    width:60px; 
-    height:60px;
-    margin:3px;
-    padding:2px;
-    border-radius: 70%;
-}
+/*----------------------------------- SIDEBAR --------------------------------*/
 
-i
-{
+.sidebar {
+    margin: 0;
+    padding: 14px 16px;
+    width: 200px;
+    background-color: #151515/*#f1f1f1*/;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
     text-align: center;
-    color:#ea7c24;
-}
+    font-size: 15px;
+  }
+   
+  .sidebar a.active {
+    background-color: #ea7c24;;
+    color: white;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  @media screen and (max-width: 700px) 
+  {
+    .sidebar 
+    {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) 
+  {
+    .sidebar a 
+    {
+      text-align: center;
+      float: none;
+    }
+
+   }
+
+   /*Nombre de usuario*/
+   .name-user
+   {
+        display: block;
+        color: white;
+        padding: 16px;
+        text-decoration: none;
+        text-align: center;
+        font-size: 12px;
+        word-wrap: break-word;
+   }
+
+   /*Iconos de FontAwesome en general*/
+    i
+    {
+        text-align: center;
+        color:#ea7c24;
+    }
+
+
+
 
 
