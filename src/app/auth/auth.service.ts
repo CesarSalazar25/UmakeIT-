@@ -54,19 +54,20 @@ export class AuthService {
   {
     return this.afAuth.auth.signInWithPopup(provider).then(credentials => {
       const user = credentials.user;
-      this.firestore.collection<User>('users', ref => ref.where('email', '==', user.email)).valueChanges()
+      this.firestore.collection<User>('users', ref => ref.where('email', '==', user.email)).snapshotChanges()
       .subscribe(data => {
         if(!data.length)
         {
-          const newUser = {
+          const newUser = 
+          {
             uid: user.uid,
             email: user.email,
             name: user.displayName,
             photoUrl: user.photoURL,
-            role: 'admin'
+            role: 'customer'
           }
           this.firestore.collection('users').doc(user.uid).set(newUser).then(() => {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard'])
             return;
           })
         }
@@ -105,6 +106,6 @@ export class AuthService {
   public signOut() 
   {
     this.afAuth.auth.signOut().then(() => 
-    this.router.navigate(['/Login']))
+    this.router.navigate(['/login']));
   }
 }
