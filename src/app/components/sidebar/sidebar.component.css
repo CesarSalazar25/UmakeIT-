@@ -75,3 +75,13 @@
         text-align: center;
         color:#ea7c24;
     }
+
+    /*Foto de perfil*/
+    .profile-pic
+  {
+      width:100px; 
+      height:100px;
+      margin:3px;
+      padding:2px;
+      border-radius: 70%;
+  }
