@@ -3,7 +3,7 @@
 {
     width: 320px;
     height: 520px;
-    background: #000;
+    background: #151515;
     color: #fff;
     top: 50%;
     left: 50%;
@@ -18,7 +18,7 @@
 {
     width: 320px;
     height: 420px;
-    background: #000;
+    background: #151515;
     color: #fff;
     top: 50%;
     left: 50%;
@@ -88,7 +88,7 @@
 {
     cursor: pointer;
     background: #ea7c24;
-    color: #000;
+    color: #151515;
 }
 
 .login-box a 

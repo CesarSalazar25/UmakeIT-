@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { NgForm } from '@angular/forms';
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-forgot',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth: AuthService,  public router: Router) { }
 
   ngOnInit() {
   }
 
+  forgot(form: NgForm) {
+    const email = form.value.email;
+    this.auth.ForgotPassword(email);
+  }
 }

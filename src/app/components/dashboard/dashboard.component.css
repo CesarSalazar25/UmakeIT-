@@ -1,4 +1,42 @@
-.wrapper {
+/*.wrapper {
     display: flex;
     width: 100%;
+}*/
+
+* 
+{
+    box-sizing: border-box;
+}
+
+/* Contenedro para flexboxes */
+section {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+}
+
+/* Estilo del contenido */
+article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+/* Style the footer */
+footer 
+{
+    background-color: #151515;
+    text-align: center;
+    color: white;
+    padding: 10px;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
 }

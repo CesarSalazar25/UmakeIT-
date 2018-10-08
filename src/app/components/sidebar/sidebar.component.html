@@ -1,52 +1,74 @@
+<nav>
+    <!-- Determina si el usuario esta autenticado o es un invitado-->
+    <div *ngIf="auth.User | async; then authenticated"></div>
+
+    <!-- Se usa el #authenticated para renderisar el template dependiendo de la respuesta del servicio auth de firestore -->
+    <!-- Esto con tal de poder hacer uso de una navegación basada en roles-->
+
+    <!--Template para usuario autenticadoe-->
+    <ng-template #authenticated>
+            <div *ngIf="auth.User | async as User">
+                <!--div class="col-sm-3 col-md-2 hidden-xs-down sidebar"-->
+                    <!--Muestra el avatar del usuario si lo tiene, sino muestra uno predefinido-->
+                    <ul>
+                        <div class="name-user">
+                            <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
+                            <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
+                            <!--Nombre-->
+                            <br>
+                            <b>{{User.name | titlecase}}</b>
+                            <hr>
+                            <!--Rol de usuario-->
+                            <!--Se muestra el rol del usuario con un botón-->
+                            <button *ngIf="User.role === 'admin'" type="button" class="btn btn-dark btn-sm diseabled">
+                                <i class="fas fa-user-edit"></i>
+                                <b>  Administrador</b>
+                            </button>
+                            <button *ngIf="User.role === 'customer'" type="button" class="btn btn-dark btn-sm diseabled">
+                                <i class="fas fa-user-tie"></i>
+                                <b>  Cliente</b>
+                            </button>
+                        </div>
+                    </ul>
+                    <hr>
+                    <!--Perfil-->
+                    <ul>
+                        <a>
+                            <i class="fas fa-user-circle fa-2x" alighn="middle"></i>
+                            <b>    Perfil</b>
+                        </a>
+                    </ul>
+                    <hr>
+                    <!--Pedidos o compras realizadas-->
+                    <ul>
+                        <a *ngIf="User.role === 'customer'">
+                            <i class="fas fa-cart-arrow-down fa-2x"></i>
+                            <b>    Compras</b>
+                        </a>
+                    </ul>
+                    <hr>
+                    <!--Cerrar sesión-->
+                    <ul>
+                        <a (click)="auth.signOut()">
+                            <i class="fas fa-sign-out-alt fa-2x"></i>
+                            <b>    Salir</b>
+                        </a>
+                    </ul>
+                <!--/div-->
+            </div>
+    </ng-template>
+
+</nav>
+
+
+
+
+
+
 <!-- Determina si el usuario esta autenticado o es un invitado-->
-<div *ngIf="auth.User | async; then authenticated else guest"></div>
+
 
 <!-- Se usa el #authenticated para renderisar el template dependiendo de la respuesta del servicio auth de firestore -->
 <!-- Esto con tal de poder hacer uso de una navegación basada en roles-->
 
 <!--Template para usuario autenticadoe-->
-<ng-template #authenticated>
-  <div *ngIf="auth.User | async as User">
-    <div class="col-sm-3 col-md-2 hidden-xs-down sidebar">
-        <!--Muestra el avatar del usuario si lo tiene, sino muestra uno predefinido-->
-        <div class="name-user">
-        <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
-        <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
-        <!--Nombre-->
-        <br>
-        <b>{{User.name | titlecase}}</b>
-        <hr>
-        <!--Rol de usuario-->
-        <!--Se muestra el rol del usuario con un botón-->
-        <button *ngIf="User.role === 'admin'" type="button" class="btn btn-dark btn-sm diseabled">
-            <i class="fas fa-user-edit" alighn="middle"></i>
-            <b>  Administrador</b>
-        </button>
-        <button *ngIf="User.role === 'customer'" type="button" class="btn btn-dark btn-sm diseabled">
-            <i class="fas fa-user-tie" alighn="middle"></i>
-            <b>  Cliente</b>
-        </button>
-        </div>
-            <hr>
-            <!--Perfil-->
-            <a>
-                <i class="fas fa-user-circle fa-2x" alighn="middle"></i>
-                <b>    Perfil</b>
-            </a>
-            <hr>
-            <!--Pedidos o compras realizadas-->
-            <a *ngIf="User.role === 'customer'">
-                <i class="fas fa-cart-arrow-down fa-2x"></i>
-                <b>    Compras</b>   
-            </a>
-            <hr>
-            <!--Cerrar sesión-->
-            <a (click)="auth.signOut()">
-                <i class="fas fa-sign-out-alt fa-2x"></i>
-                <b>    Salir</b> 
-            </a>
-          </div>   
-    </div>
-  
-
-</ng-template>  

@@ -108,4 +108,13 @@ export class AuthService {
     this.afAuth.auth.signOut().then(() => 
     this.router.navigate(['/login']));
   }
+  //recuperar contraseña
+  public ForgotPassword(email)
+  {
+    this.afAuth.auth.sendPasswordResetEmail(email).then(function() {
+      alert("email sent")
+    }).catch(function(error) {
+      alert(error.message);
+    });
+    }
 }
