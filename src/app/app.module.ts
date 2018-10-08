@@ -35,7 +35,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -45,8 +44,7 @@ import { FooterComponent } from './components/footer/footer.component';
     DashboardComponent,
     ShopComponent,
     SidebarComponent,
-    HomeComponent,
-    FooterComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,

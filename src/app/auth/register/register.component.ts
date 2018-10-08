@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
       this.afs.collection('users').doc(FireUser.uid).set(data)
       .then(()=> {
         this.auth.emailAndPassword(email, password).then(() => {
-          this.router.navigate(['/shop]']);
+          this.router.navigate(['/dashboard/shop]']);
         }).catch(err => {
           alert(err.message);
         })
