@@ -15,17 +15,17 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse show" id="navbar12"> 
-                <a class="navbar-brand d-none d-md-block" href="#">
+                <a class="navbar-brand d-none d-md-block" [routerLink]="['home']">
                 <img class="img-fluid logo" alighn="middle" src="/assets/img/logo.png">
                 <b><b>UmakeIT!</b></b>
                 </a>
                 <!-- Se cambia el navbar dependiendo del rol del usuario-->
                 <ul class="navbar-nav mx-auto">
-                <li class="nav-item"> <a class="nav-link" [routerLinkActive]="['dashboard']">Home</a> </li>
+                <li class="nav-item"> <a class="nav-link" [routerLinkActive]="['home']">Home</a> </li>
                 <li class="nav-item"> 
-                    <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['/admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a> 
+                    <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a> 
                 </li>
-                <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLinkActive]="['/carrito']">Carrito</a> </li>
+                <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLinkActive]="['home']">Carrito</a> </li>
                 <li class="nav-item"> 
                     <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Tienda</a> 
                 </li>

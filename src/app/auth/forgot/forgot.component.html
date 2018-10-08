@@ -1,0 +1,32 @@
+<div class="login-box forgot">
+    <img src="/assets/img/logo.png" class="avatar" alt="Avatar Image">
+    <h1>Recuperar contraseña</h1>
+    <p>Introduzca su dirección de correo para restablecer su contraseña.</p>
+    <form (ngSubmit)="onSignup(f)" #f="ngForm" novalidate="">
+      <!-- Introduce email -->
+        <!--Validaciones para verificar que el correo cumple el formato-->
+    <div class="form-group formlogin">
+      <input type="text" id="email" name="email" class="form-control" #email="ngModel" ngModel class="form-control"
+      [ngClass]= "{'is-invalid':email.errors!=null && email.touched, 'is-valid':email.errors==null}" 
+      required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Correo electrónico">
+      <!--Muestra mensajes acerca de validaciones-->
+        <div class="invalid-feedback">
+            <div *ngIf="email.errors?.required">
+                <small>Este campo es requerido.</small>
+            </div>
+            <div *ngIf="email.errors?.pattern">
+            <small>Debe cumplir con un patrón de correo electrónico (ej: micorreo@example.com).</small>
+            </div>
+        </div>
+        <!--Se enmarca ligeramente en verde si se cumple con el formato válido-->
+        <div *ngIf="email.valid" class="valid-feedback"></div>
+    </div> 
+        <hr>
+
+        <!--Submit para proceder con la recuperación de la contraseña-->
+        <input type="submit" value="Registrarse" [disabled]="!f.valid">
+        
+      <a [routerLink]="['/login']" routerLinkActive="active">¿Ya dispone de una cuenta con nosotros?</a>
+      <hr>
+    </form>
+</div>

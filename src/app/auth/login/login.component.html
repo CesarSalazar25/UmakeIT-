@@ -23,14 +23,14 @@
             <!--Submit para iniciar sesión con correo electrónico-->
             <input type="submit" value="Acceder" [disabled]="!f.valid">
             
-            <p>ó</p>
+          <p>ó</p>
 
           <!--Botón para iniciar sesión con Google-->  
           <button type="button" (click)="auth.googleLogin()" class="btn btn-google">
                 <i class="fab fa-google" ></i>  Google
             </button>
             <hr>
-          <a [routerLink]="['/register']" routerLinkActive="active">¿Olvidaste tu contraseña?</a><br>
+          <a [routerLink]="['/forgot']" routerLinkActive="active">¿Olvidaste tu contraseña?</a><br>
           <a [routerLink]="['/register']" routerLinkActive="active">¿No tienes una cuenta?</a>
           <hr>
         </form>

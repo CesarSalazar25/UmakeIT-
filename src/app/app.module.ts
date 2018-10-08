@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ShopComponent } from './components/shop/shop.component';
+import { HomeComponent } from './components/home/home.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
@@ -42,7 +43,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     NavbarComponent,
     DashboardComponent,
     ShopComponent,
-    SidebarComponent
+    SidebarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

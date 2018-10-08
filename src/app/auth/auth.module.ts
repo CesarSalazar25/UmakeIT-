@@ -15,6 +15,7 @@ import { AuthGuard } from './auth.guard';
 //Componentes:
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { ForgotComponent } from './forgot/forgot.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { LoginComponent } from './login/login.component';
     AngularFireAuthModule,
     FormsModule
   ],
-  declarations: [RegisterComponent, LoginComponent],
+  declarations: [RegisterComponent, LoginComponent, ForgotComponent],
   providers: [AuthService, AuthGuard]
 })
 export class AuthModule { }
