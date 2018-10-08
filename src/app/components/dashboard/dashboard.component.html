@@ -1,5 +1,11 @@
 <app-navbar></app-navbar>
-<div class="container">
-    <router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <app-sidebar></app-sidebar>
+        <div class="col-sm-9 offset-sms-3 col-md-10 offset-md-2 pt-3">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
 

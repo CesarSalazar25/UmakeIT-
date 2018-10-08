@@ -7,7 +7,7 @@
 <!--Template para usuario autenticadoe-->
 <ng-template #authenticated>
   <div *ngIf="auth.User | async as User">
-    <div class="sidebar">
+    <div class="col-sm-3 col-md-2 hidden-xs-down sidebar">
         <!--Muestra el avatar del usuario si lo tiene, sino muestra uno predefinido-->
         <div class="name-user">
         <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
