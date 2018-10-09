@@ -19,7 +19,7 @@
         <tbody>
             <tr *ngFor="let product of productosCarrito">
                 <td>{{product.name | titlecase}}</td>
-                <td>{{product.price}} BsS</td>
+                <td>${{product.price}}</td>
                 <td>{{product.cantidad}}</td>
                 <td>
                     <button type="button" class="btn btn-danger">
@@ -33,8 +33,8 @@
 
 <br>
 <div class="container">
-    <p> <b>Precio total: </b>{{total}}</p>
-    <p><b>Precio con IVA: </b>{{totalIva}}</p>
+    <p> <b>Precio total: </b>${{total}}</p>
+    <p><b>Precio con IVA: </b>${{totalIva}}</p>
 </div>
 
 <hr>
