@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">Dashboard > Shop </a>
+    <a class="navbar-brand">Dashboard > Administración </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,6 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <!--Solo para que el search quede a la izquierda-->
+
+        </ul>
+        <ul class="navbar-nav mr-auto">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Crear Producto</button>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -16,21 +20,16 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4 py-1" *ngFor="let product of productos">
+        <div class="col-lg-3 py-1" *ngFor="let product of productos">
             <div class="card" *ngIf="product.available ==true">
                 <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{product.name}}</h5>
                     <p class="card-text">{{product.description}}</p>
                     <p class="card-text">price: {{product.price}}</p>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Quantity" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <a class="btn btn-outline-secondary" type="button">Button</a>
-                            <a class="btn btn-outline-secondary" type="button">Button</a>
-                        </div>
-                    </div>
-                    <a class=" btn btn-primary" type="button">Añadir al carrito</a>
+
+                    <button class=" btn btn-primary" type="button">Editar</button>
+                    <button class="btn btn-primary" type="button">Quitar Disponibilidad</button>
                 </div>
             </div>
         </div>

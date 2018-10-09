@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { HomeComponent } from './components/home/home.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
@@ -20,12 +21,13 @@ import { APP_ROUTING } from './app.routes';
 import { AuthModule } from './auth/auth.module';
 
 //Servicios:
-
+import { ProductService } from './services/product.service';
 //Pipes:
 
 //Firebase:
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {AngularFireStorageModule} from '@angular/fire/storage'
 
 //Componentes de Ngx-Bootstrap:
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -37,6 +39,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +47,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     DashboardComponent,
     ShopComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +64,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ModalModule.forRoot(),
     TabsModule.forRoot(),
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

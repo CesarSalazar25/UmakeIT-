@@ -1,40 +1,39 @@
 <!-- Determina si el usuario esta autenticado o es un invitado-->
-<div *ngIf="auth.User | async; then authenticated else guest"></div>
+<div *ngIf="auth.User | async; then authenticated"></div>
 
 <!-- Se usa el #authenticated para renderisar el template dependiendo de la respuesta del servicio auth de firestore -->
 <!-- Esto con tal de poder hacer uso de una navegación basada en roles-->
-    
+
 <!--Template para usuario autenticadoe-->
 <ng-template #authenticated>
-  
+
     <!--Navbar o Barra de navegación-->
     <div *ngIf="auth.User | async as User">
         <nav class="navbar navbar-expand-md navbar-dark">
-            <div class="container-fluid"> 
-                <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12" aria-expanded="true">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse show" id="navbar12"> 
-                    <a class="navbar-brand d-none d-md-block"  [routerLink]="['home']">
+            <div class="container-fluid">
+                <a class="navbar-brand  d-md-block" [routerLink]="['/home']">
                     <img class="img-fluid logo" alighn="middle" src="/assets/img/logo.png">
                     <b><b>UmakeIT!</b></b>
-                    </a>
+                </a>
+                <button class="navbar-toggler collapsed navbar-toggler-right border-0" (click)="isCollapsed = !isCollapsed" type="button" data-toggle="collapse" data-target="#navbar12" aria-expanded="true">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" [collapse]="isCollapsed" id="navbar12">
                     <!-- Se cambia el navbar dependiendo del rol del usuario-->
                     <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"> 
-                        <a class="nav-link" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a> 
-                    </li>
-                    <li class="nav-item"> 
-                        <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a> 
-                    </li>
-                    <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLinkActive]="['home']">Carrito</a> </li>
-                    <li class="nav-item"> 
-                        <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Tienda</a> 
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLinkActive]="['home']">Carrito</a> </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Tienda</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </div>        
+    </div>
 </ng-template>
-

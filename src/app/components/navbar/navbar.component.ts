@@ -7,6 +7,7 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isCollapsed = true;
   
   constructor(public auth: AuthService) 
   { 
