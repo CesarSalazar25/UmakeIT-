@@ -8,10 +8,10 @@ import { Product } from '../../models/product';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+
   productos: Product[];
-  constructor(
-    private productService: ProductService
-  ) { }
+
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
     this.getProducts();
@@ -20,4 +20,5 @@ export class AdminComponent implements OnInit {
   getProducts() {
     this.productService.getProductos().subscribe(productos => this.productos = productos);
   }
+
 }

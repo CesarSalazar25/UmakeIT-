@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">Dashboard > Shop </a>
+    <a class="navbar-brand"> <b>Dashboard > Tienda</b> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,8 +9,10 @@
             <!--Solo para que el search quede a la izquierda-->
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="search" placeholder="Búsqueda" aria-label="Search">
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
         </form>
     </div>
 </nav>
@@ -20,17 +22,25 @@
             <div class="card" *ngIf="product.available ==true">
                 <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{product.name}}</h5>
+                    <h5 class="card-title"><b>{{product.name}}</b></h5>
                     <p class="card-text">{{product.description}}</p>
-                    <p class="card-text">price: {{product.price}}</p>
+                    <p class="card-text"> <b>Precio:  {{product.price}} BsS</b></p>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Quantity" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <a class="btn btn-outline-secondary" type="button">Button</a>
-                            <a class="btn btn-outline-secondary" type="button">Button</a>
+                            <a class="btn btn-success" type="button">
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+                            <a class="btn btn-danger" type="button">
+                                <i class="fas fa-minus-circle"></i>
+                            </a>
                         </div>
                     </div>
-                    <a class=" btn btn-primary" type="button">Añadir al carrito</a>
+                    <hr>
+                    <a class="btn btn-dark" style="color:white" type="button">
+                        Añadir al carrito
+                        <i class="fas fa-cart-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>

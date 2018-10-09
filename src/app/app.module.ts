@@ -13,6 +13,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
@@ -22,6 +23,7 @@ import { AuthModule } from './auth/auth.module';
 
 //Servicios:
 import { ProductService } from './services/product.service';
+import { CarritoService } from './services/carrito.service';
 //Pipes:
 
 //Firebase:
@@ -37,6 +39,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 
@@ -48,7 +51,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ShopComponent,
     SidebarComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
@@ -63,11 +67,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot(),
+    CarouselModule.forRoot(),
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, CarritoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

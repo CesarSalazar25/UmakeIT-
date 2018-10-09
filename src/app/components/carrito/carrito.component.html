@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <!-- Cannot read property of undefined al hacer Ngif contra el length de productosCarrito-->
+    <!-- Una vez que se implementen funcionalidades tratar con metodos asyncronos y esperar el llenado del array -->
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of productosCarrito">
+                <td>{{product.name | titlecase}}</td>
+                <td>{{product.price}} BsS</td>
+                <td>{{product.cantidad}}</td>
+                <td> 
+                    <button type="button" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<div class="container">
+    <p> <b>Precio total: </b>{{total}}</p>
+    <p><b>Precio con IVA: </b>{{totalIva}}</p>
+</div>
+
+<hr>
+
+<button type="button" class="btn btn-primary">
+    <b>Pagar con PayPal </b>
+        <i class="fab fa-paypal fa-2x"></i>
+</button> 
+<br> <br>
+<button type="button" class="btn btn-danger">
+        <b>Vaciar carro </b>
+            <i class="fas fa-trash fa-2x"></i>
+</button> 
