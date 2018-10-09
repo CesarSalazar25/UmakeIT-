@@ -14,6 +14,8 @@ import { ShopComponent } from './components/shop/shop.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
@@ -52,7 +54,9 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     SidebarComponent,
     HomeComponent,
     AdminComponent,
-    CarritoComponent
+    CarritoComponent,
+    ComprasComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

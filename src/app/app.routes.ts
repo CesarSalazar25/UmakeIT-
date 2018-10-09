@@ -10,6 +10,8 @@ import { ShopComponent } from './components/shop/shop.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 CarritoComponent
 
 const ROUTES: Routes = [
@@ -18,7 +20,9 @@ const ROUTES: Routes = [
         {path: 'shop', component: ShopComponent},
         {path: 'home', component: HomeComponent},
         {path: 'carrito', component: CarritoComponent},
-        {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}
+        {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+        { path: 'compras', component:ComprasComponent },
+        { path: 'perfil', component: PerfilComponent }
       ]
     //{path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}
   }

@@ -1,3 +1,9 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">Dashboard > Carrito </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+</nav>
 <div class="container-fluid">
     <!-- Cannot read property of undefined al hacer Ngif contra el length de productosCarrito-->
     <!-- Una vez que se implementen funcionalidades tratar con metodos asyncronos y esperar el llenado del array -->
@@ -15,10 +21,10 @@
                 <td>{{product.name | titlecase}}</td>
                 <td>{{product.price}} BsS</td>
                 <td>{{product.cantidad}}</td>
-                <td> 
+                <td>
                     <button type="button" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>
-                    </button> 
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -36,9 +42,9 @@
 <button type="button" class="btn btn-primary">
     <b>Pagar con PayPal </b>
         <i class="fab fa-paypal fa-2x"></i>
-</button> 
+</button>
 <br> <br>
 <button type="button" class="btn btn-danger">
         <b>Vaciar carro </b>
             <i class="fas fa-trash fa-2x"></i>
-</button> 
+</button>

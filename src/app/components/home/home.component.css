@@ -1,0 +1,18 @@
+
+h1
+{
+    text-align: center;
+}
+
+img
+{
+    width:640px; 
+    height:480px;
+}
+
+h3, p
+{
+    -webkit-text-stroke: 1px black;
+    font-size: 22px;
+    color: orange;
+}
