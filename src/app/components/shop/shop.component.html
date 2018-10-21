@@ -17,30 +17,33 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4 py-1" *ngFor="let product of productos">
-            <div class="card" *ngIf="product.available ==true">
-                <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title"><b>{{product.name}}</b></h5>
-                    <p class="card-text">{{product.description}}</p>
-                    <p class="card-text"> <b>Precio:  ${{product.price}}</b></p>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <a class="btn btn-success" type="button">
-                                <i class="fas fa-plus-circle"></i>
-                            </a>
-                            <a class="btn btn-danger" type="button">
-                                <i class="fas fa-minus-circle"></i>
-                            </a>
+    <div *ngIf="auth.User | async as User">
+        <div class="row">
+            <div class="col-lg-4 py-1" *ngFor="let product of productos; let i = index">
+                <div class="card" *ngIf="product.available ==true">
+                    <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>{{product.name}}</b></h5>
+                        <p class="card-text">{{product.description}}</p>
+                        <p class="card-text"> <b>Precio: ${{product.price}}</b></p>
+                        <!-- Placer holder "cantidad"-->
+                        <div class="input-group">
+                            <input #quantity type="text" class="form-control" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{product.cantidad}}">
+                            <div class="input-group-append">
+                                <a class="btn btn-success" (click)="incrementar(i)" type="button">
+                                    <i class="fas fa-plus-circle"></i>
+                                </a>
+                                <a class="btn btn-danger" (click)="decrementar(i)" type="button">
+                                    <i class="fas fa-minus-circle"></i>
+                                </a>
+                            </div>
                         </div>
+                        <hr>
+                        <button class="btn btn-dark" (click)="GotoPersonalizarCompra(i, quantity, User.uid)" style="color:white" type="button">
+                            Añadir al carrito
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
                     </div>
-                    <hr>
-                    <a class="btn btn-dark" style="color:white" type="button">
-                        Añadir al carrito
-                        <i class="fas fa-cart-plus"></i>
-                    </a>
                 </div>
             </div>
         </div>

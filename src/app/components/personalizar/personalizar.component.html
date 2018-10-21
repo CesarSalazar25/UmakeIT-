@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="btn btn-dark my-2 my-sm-0" [routerLink]="['/dashboard/shop']">Agregar mas items</button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="btn btn-danger mx-auto my-2 my-sm-0 disabled">
+            Precio: {{Total}}
+          </button>
+        <button class="btn btn-dark my-2 my-sm-0" (click)="anadirCarrito()">
+              Confirmar
+          </button>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div *ngIf="auth.User | async as User">
+        <div class="row">
+            <div class="col-lg-4 py-1" *ngFor="let product of products; let pi = index">
+                <div class="card" *ngIf="product.available == true">
+                    <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>{{product.name}}</b><small> {{pi}}</small></h5>
+                        <div *ngIf="product.extras != undefined">
+                            <div class="form-check" *ngFor="let extra of product.extras; let i = index">
+                                <input class="form-check-input" (change)="checkboxChanged(pi, i ) " type="checkbox">
+                                <label class="form-check-label" for="DefaultCheckbox1 ">
+                                    {{extra.name}}
+                                  </label>
+                            </div>
+                        </div>
+                        <div *ngIf="product.extras==undefined ">
+                            <p>Este producto no tiene extras</p>
+                        </div>
+                        <hr>
+                        <button (click)="Prueba(pi)">presioname</button>
+                        <p class="card-text "> <b>Precio: ${{prices[pi]}}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,6 +32,7 @@ export class ProductService {
     }));
     return this.productos;
   }
+  
   getProducto( idProducto: string){
     this.productDoc = this.afs.doc<Product>(`products/${idProducto}`);
     this.producto = this.productDoc.snapshotChanges().pipe(map(action => {

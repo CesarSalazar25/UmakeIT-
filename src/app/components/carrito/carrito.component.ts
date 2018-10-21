@@ -1,26 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { CarritoService } from '../../services/carrito.service';
-import { carrito } from '../../models/carrito';
+import { CartService } from '../../services/cart.service';
+import { AuthService } from '../../auth/auth.service';
+import { Cart } from '../../models/cart';
+import { Product } from '../../models/product';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
-  productosCarrito: carrito[];
+  
+  cart: any;
   total: number;
   totalIva: number;
-  constructor(
-    private CarritoService: CarritoService
-  ) { }
+  User_id: string;
 
-  ngOnInit() {
-    this.getCarrito();
+  constructor(
+    private CartService: CartService,
+    public auth: AuthService,
+    private router: Router
+  ) { 
+
   }
 
-  getCarrito() {
-   this.CarritoService.getCarrito().subscribe(productos => this.productosCarrito = productos);
+  ngOnInit() {
+    this.auth.User.subscribe(user => {
+      if(user){
+        this.CartService.myCart(user.uid).subscribe(Cart => {
+          this.cart = Cart.payload.data();
+          //this.total = this.CartService
+          this.User_id = user.uid;
+        })
+      }
+    })
+  }
+  prueba(){
+    console.log(this.cart);
+  }
+  getCarrito(User_id: string) {
    this.total = 1111 + 12341 + 100;
    this.totalIva = this.total + (this.total*0.12);
+   this.cart = this.CartService.myCart(User_id);
   }
 }

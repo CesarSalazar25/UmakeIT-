@@ -5,8 +5,6 @@
 </button>
 </nav>
 <div class="container-fluid">
-    <!-- Cannot read property of undefined al hacer Ngif contra el length de productosCarrito-->
-    <!-- Una vez que se implementen funcionalidades tratar con metodos asyncronos y esperar el llenado del array -->
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -17,10 +15,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of productosCarrito">
+            <tr *ngFor="let product of cart.products">
                 <td>{{product.name | titlecase}}</td>
                 <td>${{product.price}}</td>
-                <td>{{product.cantidad}}</td>
+                <td>{{product.qty}}</td>
                 <td>
                     <button type="button" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>
@@ -39,7 +37,7 @@
 
 <hr>
 
-<button type="button" class="btn btn-primary">
+<button type="button" (click)="prueba()" class="btn btn-primary">
     <b>Pagar con PayPal </b>
         <i class="fab fa-paypal fa-2x"></i>
 </button>

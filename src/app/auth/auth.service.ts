@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 //Firebase:
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
 
 //Modelos:
@@ -26,6 +26,7 @@ export class AuthService {
     private router: Router
   ) 
   {
+    
     //Se comprueba si el usuario esta correctamente logeado en la aplicación:
     this.User = this.afAuth.authState.pipe(switchMap(User => 
     {

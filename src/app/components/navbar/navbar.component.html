@@ -27,7 +27,7 @@
                         <li class="nav-item">
                             <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a>
                         </li>
-                        <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['carrito']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Carrito</a> </li>
+                        <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['carrito']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Carrito({{cart?.totalProducts}})</a> </li>
                         <li class="nav-item">
                             <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Tienda</a>
                         </li>

@@ -12,7 +12,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-CarritoComponent
+import { PersonalizarComponent } from './components/personalizar/personalizar.component';
 
 const ROUTES: Routes = [
     { path: 'dashboard', component: DashboardComponent,
@@ -22,10 +22,12 @@ const ROUTES: Routes = [
         {path: 'carrito', component: CarritoComponent},
         {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
         { path: 'compras', component:ComprasComponent },
-        { path: 'perfil', component: PerfilComponent }
+        { path: 'perfil', component: PerfilComponent },
+        { path: 'personalize', component: PersonalizarComponent }
       ]
     //{path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}
-  }
+  },
+  { path: '**', pathMatch: 'full', redirectTo: 'dashboard/shop' }
 ];
 
 export const APP_ROUTING= RouterModule.forRoot(ROUTES);

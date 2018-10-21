@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http'
 import { environment } from '../environments/environment';
 
@@ -25,7 +25,7 @@ import { AuthModule } from './auth/auth.module';
 
 //Servicios:
 import { ProductService } from './services/product.service';
-import { CarritoService } from './services/carrito.service';
+import { CartService } from './services/cart.service';
 //Pipes:
 
 //Firebase:
@@ -42,6 +42,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { PersonalizarComponent } from './components/personalizar/personalizar.component';
 
 
 
@@ -56,12 +57,14 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     AdminComponent,
     CarritoComponent,
     ComprasComponent,
-    PerfilComponent
+    PerfilComponent,
+    PersonalizarComponent
   ],
   imports: [
     BrowserModule,
     AuthModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     APP_ROUTING,
     BsDropdownModule.forRoot(),
@@ -76,7 +79,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule
   ],
-  providers: [ProductService, CarritoService],
+  providers: [ProductService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
