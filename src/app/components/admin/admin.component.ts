@@ -21,4 +21,10 @@ export class AdminComponent implements OnInit {
     this.productService.getProductos().subscribe(productos => this.productos = productos);
   }
 
+  removeAvaliable(product: Product){
+    this.productService.quitarDisponibilidad(product);
+  }
+  AddAvaliable(product: Product){
+    this.productService.agregarDisponibildiad(product);
+  }
 }

@@ -11,6 +11,7 @@ export class ProductService {
   productCollection: AngularFirestoreCollection<Product>;
   productDoc: AngularFirestoreDocument<Product>;
   productos: Observable<Product[]>;
+  productosDisponible: Observable<Product[]>;
   producto: Observable<Product>;
 
   constructor( 
@@ -25,14 +26,25 @@ export class ProductService {
   getProductos():Observable<Product[]>{
     this.productos = this.productCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(action => {
-        const data = action.payload.doc.data() as Product;
-        data.id = action.payload.doc.id;
-        return data;
+          const data = action.payload.doc.data() as Product;
+          data.id = action.payload.doc.id;
+          return data;
       });
     }));
     return this.productos;
   }
-  
+
+  getProductosDisponible():Observable<Product[]>{
+    this.productosDisponible = this.productCollection.snapshotChanges().pipe(map(changes=> {
+      return changes.map(action => {
+          const data = action.payload.doc.data() as Product;
+          data.id = action.payload.doc.id;
+          return data;
+      });
+    }));
+    return this.productosDisponible.pipe(map(arr => arr.filter( r => r.available === true)))
+  }
+
   getProducto( idProducto: string){
     this.productDoc = this.afs.doc<Product>(`products/${idProducto}`);
     this.producto = this.productDoc.snapshotChanges().pipe(map(action => {
@@ -51,9 +63,19 @@ export class ProductService {
     this.productDoc = this.afs.doc(`products/${product.id}`);
     this.productDoc.update(product);
   }
-
+  //Not even use
   deleteProducto(product: Product){
     this.productDoc = this.afs.doc(`products/${product.id}`);
     this.productDoc.delete();
+  }
+  quitarDisponibilidad(product: Product){
+    this.productDoc = this.afs.doc(`products/${product.id}`);
+    product.available = false;
+    this.productDoc.update(product);
+  }
+  agregarDisponibildiad(product: Product){
+    this.productDoc = this.afs.doc(`products/${product.id}`);
+    product.available = true;
+    this.productDoc.update(product);
   }
 }

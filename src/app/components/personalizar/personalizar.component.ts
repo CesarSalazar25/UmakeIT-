@@ -54,7 +54,6 @@ export class PersonalizarComponent implements OnInit {
     }
   }
 
-
   anadirCarrito(){
     //Limpar los productos del serivcio intermediario
     this.personalizeService.clearProducts();

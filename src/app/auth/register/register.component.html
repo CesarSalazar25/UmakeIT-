@@ -42,16 +42,7 @@
         </div>
         <hr>
 
-
-        <!--div class="custom-control custom-checkbox"-->
-        <!--input type="checkbox" class="custom-control-input" id="customCheck1" required name="acepta" [(ngModel)]="usuario.acepta" #acepta>
-                    <label class="custom-control-label" for="customCheck1"><small>He leído y acepto los términos y condiciones.</small></label>
-                </div>
-
-            <hr-->
-        <!--Submit para iniciar sesión con correo electrónico-->
         <input type="submit" value="Registrarse" [disabled]="!f.valid">
-
         <a [routerLink]="['/login']" routerLinkActive="active">¿Ya dispone de una cuenta con nosotros?</a>
         <hr>
     </form>

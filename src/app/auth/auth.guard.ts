@@ -18,7 +18,7 @@ canActivate(
     take(1), 
     map(user => !!user), 
     tap(loggedIn => {
-      if ( ! loggedIn) {
+      if ( !loggedIn) {
         this.router.navigate(['/login']);
       }
     })

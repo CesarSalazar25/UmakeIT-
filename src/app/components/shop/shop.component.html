@@ -20,7 +20,7 @@
     <div *ngIf="auth.User | async as User">
         <div class="row">
             <div class="col-lg-4 py-1" *ngFor="let product of productos; let i = index">
-                <div class="card" *ngIf="product.available ==true">
+                <div class="card" *ngIf="product.available == true">
                     <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><b>{{product.name}}</b></h5>

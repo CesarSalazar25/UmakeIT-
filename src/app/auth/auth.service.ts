@@ -26,7 +26,6 @@ export class AuthService {
     private router: Router
   ) 
   {
-    
     //Se comprueba si el usuario esta correctamente logeado en la aplicación:
     this.User = this.afAuth.authState.pipe(switchMap(User => 
     {

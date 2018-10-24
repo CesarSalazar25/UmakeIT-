@@ -3,7 +3,6 @@ import { AuthService } from "../auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Title } from "@angular/platform-browser";
 import { Router} from "@angular/router";
-import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 
 

@@ -37,13 +37,13 @@
                     </div>
                     <br>
                 </div>
+
                 <!--/col-3-->
                 <div class="col-sm-9">
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
                             <hr>
-                            <!-- USAR DATABINDING EN LOS PLACE HOLDERS -->
-                            <form class="form" method="post" id="perfilForm">
+                            <form #f="ngForm" class="form">
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <label for="first_name"><h4>Nombre</h4></label>
@@ -74,8 +74,8 @@
                                         <br>
                                         <button class="btn btn-lg btn-success" type="submit">
                                                         Actualizar
-                                                        <i class="fas fa-sync-alt"></i>
-                                                </button>
+                                                <i class="fas fa-sync-alt"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </form>

@@ -24,8 +24,7 @@ cantidad: number;
 carritoProducts: Product[] = [];
 carritoExtras: Extras[][] = [];
 ExtraTest: Extras[];
-PrecioTotal: number;
-selectedOption: number =1; 
+PrecioTotal: number; 
 
 @ViewChild('carousel') carousel: CarouselComponent;
 
@@ -40,12 +39,13 @@ selectedOption: number =1;
 
   ngOnInit() {
     this.getProducts();
+
   }
 
   getProducts() {
-    this.productService.getProductos().subscribe(productos => this.productos = productos);
+    this.productService.getProductosDisponible().subscribe(productos => this.productos = productos);
   }
-  
+
   //En caso de modal usar esto (por si decido volver al modal luego)
   //Para modal usar FormArray
   DescriptionModal(i: number, quantity: HTMLInputElement, template: TemplateRef<any>){
@@ -112,14 +112,3 @@ selectedOption: number =1;
     this.router.navigate(['dashboard/personalize']);
   }
 }
-// export class Product {
-//     id?: string;
-//     name?: string;
-//     price?: number;
-//     description?: string;
-//     photoUrl?: string;
-//     available?: boolean;
-//     created_at: Date = new Date();
-//     cantidad?: number;
-//     extras?: Extras[];
-
