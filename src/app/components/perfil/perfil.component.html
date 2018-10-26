@@ -18,28 +18,53 @@
 
 
         <div class="container">
-            <div class="row">
-                <div class="col-sm-10">
-                    <h1>Perfil de usuario</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <!--left col-->
-                    <div class="text-center">
-                        <!--img src="/assets/img/sin-perfil.png" class="avatar img-circle img-thumbnail" alt="avatar"-->
+
+            <div class="container">
+
+                    <!--Imagen de Perfil-->
+                    <div class="img-profile">
                         <img class="img-fluid img-circle img-thumbnail profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
-                        <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
-                        <button type="button" class="btn btn-success">
-                                    Subir foto nueva
-                                        <i class="fas fa-upload"></i>
-                                </button>
+                        <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png"> 
                     </div>
                     <br>
-                </div>
 
-                <!--/col-3-->
-                <div class="col-sm-9">
+                    <!--Muestra el url de la imagen montada en Storage, para pruebas-->>
+                    <!--div class="item" style="max-width: 600px">
+                        <section>
+                          <span style="color: grey; font-size: .8em">
+                            {{ uploadURL |async }}
+                          </span>
+                        </section>
+                        <section *ngIf="uploadURL && (uploadURL | async) !== null && (uploadURL | async).length">
+                          <a [href]="uploadURL | async" target="_blank">Open image!</a>
+                        </section>
+                      </div-->
+ 
+                    <!--Para actualizar/añadir imagen de perfil a un usuario-->
+                    <div class="container">
+                        <!--Barra de progreso-->
+                        <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+                        <!--Muestra el progreso de la barra-->
+                        <div class="item">
+                                Progress: {{ (uploadProgress | async) / 100 | percent }}
+                        </div>
+                        <br>
+
+                        <!--Se sube una nueva foto para el usuario-->
+                        <div class="item">
+                            <!--Selecciona un archivo .png o .jpg-->
+                            <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg">
+                            <!--Botón para poner en funcionamiento el input-->
+                            <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click()">
+                                Subir foto
+                                <i class="fas fa-upload"></i>
+                            </button>   
+                        </div>
+                    </div>
+
+                <!--Se muestran los otros datos del usuario-->
+                <div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
                             <hr>

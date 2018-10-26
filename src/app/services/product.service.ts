@@ -33,7 +33,24 @@ export class ProductService {
     }));
     return this.productos;
   }
-
+  
+  buscarProducto(termino:string)
+  {
+     let productsArr:Product[]=[];
+     termino = termino.toLowerCase();
+     //Hacer metodo para suscribirme al observable y luego igualarlo a mi array
+    //  for(let i=0; i<this.productosDisponible.length; i++)
+    //  {
+    //    let heroe = this.productosDisponible[i];
+    //    let nombre = heroe.nombre.toLowerCase();
+    //    if(nombre.indexOf(termino) >=0)
+    //    { 
+    //      heroe.idx = i;
+    //      productsArr.push(heroe);
+    //    }
+    //  }
+     return productsArr;
+  }
   getProductosDisponible():Observable<Product[]>{
     this.productosDisponible = this.productCollection.snapshotChanges().pipe(map(changes=> {
       return changes.map(action => {
@@ -44,7 +61,7 @@ export class ProductService {
     }));
     return this.productosDisponible.pipe(map(arr => arr.filter( r => r.available === true)))
   }
-
+ 
   getProducto( idProducto: string){
     this.productDoc = this.afs.doc<Product>(`products/${idProducto}`);
     this.producto = this.productDoc.snapshotChanges().pipe(map(action => {

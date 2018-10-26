@@ -1,0 +1,26 @@
+<h1>Resultados de la búsqueda : <small>{{termino}}</small> </h1>
+<hr>
+
+<div class="row" *ngIf="Productos.length==0">
+    <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+            No existen resultados con el término: {{termino}}
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 py-1" *ngFor="let product of Productos">
+            <div class="card">
+                <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b>{{product.name}}</b></h5>
+                    <hr>
+                    <p class="card-text">{{product.description}}</p>
+                    <p class="card-text"><b>Precio: ${{product.price}}</b></p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

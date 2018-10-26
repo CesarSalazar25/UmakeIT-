@@ -2,5 +2,17 @@ img
 {
     margin:3px;
     padding:2px;
+    height: 250px;
+    width: 250px;
     border-radius: 70%;
+}
+
+.container
+{
+    text-align: center;
+}
+
+.hidden 
+{  
+    display: none;
 }

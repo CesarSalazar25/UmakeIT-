@@ -10,14 +10,14 @@
 
         </ul>
         <ul class="navbar-nav mr-auto">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Nuevo Producto
+            <button (click)="openCreateModal(CreateTemplate)" class="btn btn-success my-2 my-sm-0" type="submit">Nuevo Producto
                     <i class="fas fa-pencil-alt"></i>
             </button>
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Búsqueda" aria-label="Search">
-            <button class="btn btn-dark my-2 my-sm-0" type="submit">
+            <input #SearchText (keyup.enter)="search(SearchText.value)" name="search" class="form-control mr-sm-2" type="search" placeholder="Búsqueda" aria-label="Search">
+            <button (click)="search(SearchText.value)" class="btn btn-dark my-2 my-sm-0" type="submit">
                     <i class="fas fa-search"></i>
             </button>
         </form>
@@ -30,20 +30,22 @@
                 <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><b>{{product.name}}</b></h5>
+                    <hr>
                     <p class="card-text">{{product.description}}</p>
-                    <p class="card-text"><b>Precio:  {{product.price}} BsS</b></p>
+                    <p class="card-text"><b>Precio: ${{product.price}}</b></p>
+                    <hr>
 
-                    <button class=" btn btn-success" type="button">Editar
+                    <button (click)="openModal(Edittemplate, product)" class=" btn btn-success" type="button">Editar
                         <i class="fas fa-edit"></i>
                     </button>
-                    <hr>
+                    <br><br>
                     <div *ngIf="product.available == true">
                         <button (click)="removeAvaliable(product)" class="btn btn-danger" type="button">Quitar Disponibilidad
                             <i class="fas fa-backspace"></i>
                     </button>
                     </div>
                     <div *ngIf="product.available == false">
-                        <button (click)="AddAvaliable(product)" class="btn btn-success" type="button"> Agregar Disponibilidad
+                        <button (click)="AddAvaliable(product)" class="btn btn-primary" type="button"> Agregar Disponibilidad
                                 <i class="fas fa-backspace"></i>
                         </button>
                     </div>
@@ -52,3 +54,195 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para editar el producto que frao -->
+<ng-template #Edittemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Formulario de Edición: {{selectedProduct.name}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <!--Foto-->
+                    <div class="text-center">
+                        <img src={{selectedProduct.photoUrl}} class="img-thumbnail" alt="avatar">
+                        <h6>Seleccione una nueva foto</h6>
+                        <input type="file">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="tab-content">
+                        <form #f="ngForm" class="form" id="ProductForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="name"><h4>Nombre</h4></label>
+                                    <input [(ngModel)]="nameValue" #name="ngModel" ngModel type="text" class="form-control" name="name" id="name" placeholder="Nombre del producto">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="descripcion"><h4>Descripción</h4></label>
+                                    <textarea [(ngModel)]="descriptionValue" #descripcion="ngModel" ngModel type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion del producto"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="precio"><h4>Precio</h4></label>
+                                    <input [(ngModel)]="priceValue" #precio="ngModel" ngModel type="number" class="form-control" name="precio" id="precio" placeholder="Introduzca el precio">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <!-- agregar navs para cada extra -->
+                                <label><h4>Extras</h4></label>
+                                <button (click)="openModal2(templateNested)" class="btn btn-success btn-sm" type="button">
+                                            <i class="fas fa-plus-circle"></i>
+                                    </button>
+                                <tabset #extraTabs [vertical]="true" type="pills">
+                                    <div *ngIf="selectedProduct.extras != undefined">
+                                        <tab (removed)="removeExtra(extra)" [removable]="true" [active]="false" [disabled]=true *ngFor="let extra of selectedProduct.extras" heading="{{extra.name}}"></tab>
+                                    </div>
+                                </tabset>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-primary" (click)="updateProduct(f)" type="submit">Actualizar</button>
+                                    <button class="btn btn-lg btn-default" (click)="decline()">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Modal añadir extras -->
+<ng-template #templateNested>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Formulario para añadir un extra </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #k="ngForm" class="form" id="ExtraForm">
+            <div class="form-group">
+                <label for="name"><h4>Nombre</h4></label>
+                <input #ExtraName="ngModel" ngModel type="text" class="form-control" name="extraName" id="extraName" placeholder="Nombre del extra">
+            </div>
+            <div class="form-group">
+                <label for="precio"><h4>Precio</h4></label>
+                <input #ExtraPrecio="ngModel" ngModel type="number" class="form-control" name="extraPrecio" id="extraPrecio" placeholder="Precio del extra">
+            </div>
+        </form>
+        <button class="btn btn-success" type="submit" (click)="addExtra(k, Edittemplate)">Añadir Extra</button>
+        <button type="button" class="btn btn-danger" (click)="closeSecondModal(Edittemplate)">Cancelar</button>
+    </div>
+</ng-template>
+
+<!-- Modal para la creacion del producto -->
+
+<ng-template #CreateTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Formulario para la creación de un producto</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="createModalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <!--Foto-->
+                    <div class="text-center">
+                        <img src="/assets/img/sin-perfil.png" class="img-thumbnail" alt="avatar">
+                        <h6>Seleccione la foto para el producto</h6>
+                        <input type="file" (change)="upload($event)" accept=".png,.jpg">
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="tab-content">
+                        <form #cf="ngForm" class="form" id="CreateForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="name"><h4>Nombre</h4></label>
+                                    <input [(ngModel)]="newProduct.name" #name="ngModel" ngModel type="text" class="form-control" name="name" id="name" placeholder="Nombre del producto">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="descripcion"><h4>Descripción</h4></label>
+                                    <textarea [(ngModel)]="newProduct.description" #descripcion="ngModel" ngModel type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion del producto"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="precio"><h4>Precio</h4></label>
+                                    <input [(ngModel)]="newProduct.price" #precio="ngModel" ngModel type="number" class="form-control" name="precio" id="precio" placeholder="Introduzca el precio">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <!-- agregar navs para cada extra -->
+                                <label><h4>Extras</h4></label>
+                                <button (click)="openCreateModal2(CreatetemplateNested)" class="btn btn-success btn-sm" type="button">
+                                            <i class="fas fa-plus-circle"></i>
+                                    </button>
+                                <tabset #extraTabs [vertical]="true" type="pills">
+                                    <div *ngIf="newProduct.extras.length > 0">
+                                        <tab (removed)="removeCreateExtra(extra)" [removable]="true" [active]="false" [disabled]=true *ngFor="let extra of newProduct.extras" heading="{{extra.name}}"></tab>
+                                    </div>
+                                </tabset>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-primary" (click)="createProduct(cf)" type="submit">CrearProducto</button>
+                                    <button class="btn btn-lg btn-default" (click)="declineCreate()">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Modal añadir extras -->
+<ng-template #CreatetemplateNested>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Formulario para añadir un extra </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+            <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body">
+        <form #ck="ngForm" class="form" id="ExtraForm">
+            <div class="form-group">
+                <label for="name"><h4>Nombre</h4></label>
+                <input #ExtraName="ngModel" ngModel type="text" class="form-control" name="extraName" id="extraName" placeholder="Nombre del extra">
+            </div>
+            <div class="form-group">
+                <label for="precio"><h4>Precio</h4></label>
+                <input #ExtraPrecio="ngModel" ngModel type="number" class="form-control" name="extraPrecio" id="extraPrecio" placeholder="Precio del extra">
+            </div>
+        </form>
+        <button class="btn btn-success" type="submit" (click)="addCreateExtra(ck, CreateTemplate)">Añadir Extra</button>
+        <button type="button" class="btn btn-danger" (click)="closeSecondCreateModal(CreateTemplate)">Cancelar</button>
+    </div>
+</ng-template>

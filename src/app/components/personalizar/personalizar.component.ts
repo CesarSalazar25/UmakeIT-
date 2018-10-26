@@ -30,13 +30,14 @@ export class PersonalizarComponent implements OnInit {
     
     for (let i = 0; i < this.products.length; i++) {
       this.prices[i] = this.products[i].price;  
+      this.Total += this.prices[i];
     }
   }
 
   getProducts() {
    this.products = this.personalizeService.getProducts();
   }
-
+  //Si funciona padre/hijo ELIMINAR ESTA COCHINADA DE MIERDA 
   checkboxChanged(productIndex: number, extraIndex: number){
     console.log(this.prices);
     console.log(this.products);
@@ -50,12 +51,29 @@ export class PersonalizarComponent implements OnInit {
       this.products[productIndex].extras[extraIndex].anadido = !this.products[productIndex].extras[extraIndex].anadido
       var price = -this.products[productIndex].extras[extraIndex].price;
       this.prices[productIndex] += price;
-      this.Total -= price;
+      this.Total += price;
     }
   }
 
+
+
+  ExtraChange(agregado: boolean, productIndex: number, extraIndex: number){
+    if(agregado){
+      this.products[productIndex].extras[extraIndex].anadido = agregado;
+      var price = +this.products[productIndex].extras[extraIndex].price;
+      this.prices[productIndex] += price;
+      this.Total += price;
+    }else {
+      this.products[productIndex].extras[extraIndex].anadido = agregado;
+      var price = -this.products[productIndex].extras[extraIndex].price;
+      this.prices[productIndex] += price;
+      this.Total += price;
+    }
+    console.log(this.products);
+  }
+
   anadirCarrito(){
-    //Limpar los productos del serivcio intermediario
+    //Limpar los productos del servicio intermediario
     this.personalizeService.clearProducts();
     //Obtener la cantidad de productos totales
     let cantidad = this.personalizeService.cantidad;

@@ -8,8 +8,7 @@
         <!-- Introduce email -->
         <!--Validaciones para verificar que el correo cumple el formato-->
         <div class="form-group formlogin">
-            <input type="text" id="email" name="email" class="form-control" #email="ngModel" ngModel class="form-control" [ngClass]="{'is-invalid':email.errors!=null && email.touched, 'is-valid':email.errors==null}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                placeholder="Correo electrónico">
+            <input type="text" id="email" name="email" class="form-control" #email="ngModel" ngModel [ngClass]="{'is-invalid':email.errors!=null && email.touched, 'is-valid':email.errors==null}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Correo electrónico">
             <!--Muestra mensajes acerca de validaciones-->
             <div class="invalid-feedback">
                 <div *ngIf="email.errors?.required">
@@ -26,8 +25,7 @@
         <!-- Introduce password -->
         <!--Validaciones para verificar que el password cumple el formato-->
         <div class="form-group formlogin">
-            <input type="password" class="form-control" id="password" name="password" #password="ngModel" ngModel class="form-control" placeholder="Password" [ngClass]="{'is-invalid':password.errors!=null && password.touched, 'is-valid':password.errors==null}" required
-                minlength="6">
+            <input type="password" class="form-control" id="password" name="password" #password="ngModel" ngModel placeholder="Password" [ngClass]="{'is-invalid':password.errors!=null && password.touched, 'is-valid':password.errors==null}" required minlength="6">
             <!--Muestra mensajes acerca de validaciones-->
             <div class="invalid-feedback">
                 <div *ngIf="password.errors?.required">

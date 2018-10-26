@@ -21,7 +21,7 @@
 /*Nombre del proyecto*/
 .navbar-brand
 {
-    font-family: 'Segoe Script' /*Otras opciones: sans-serif, Verdana*/;
+    font-family: 'sans-serif' /*Otras opciones: Verdana*/;
     font-size: 30px;
     color: #ea7c24;
     margin:3px;

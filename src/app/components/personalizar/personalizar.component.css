@@ -1,0 +1,25 @@
+.card 
+{
+    /*text-align: center;*/
+    padding: 20px;
+    background-color: #151515;
+    color: white;
+}
+ h5, p
+{
+    text-align: center;
+}
+ hr
+{
+    background-color: antiquewhite;
+}
+ /*Imágenes de Productos*/
+img 
+{
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}

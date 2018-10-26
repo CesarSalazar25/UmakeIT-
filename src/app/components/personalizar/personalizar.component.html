@@ -13,27 +13,22 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div *ngIf="auth.User | async as User">
-        <div class="row">
-            <div class="col-lg-4 py-1" *ngFor="let product of products; let pi = index">
-                <div class="card" *ngIf="product.available == true">
-                    <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><b>{{product.name}}</b><small> {{pi}}</small></h5>
-                        <div *ngIf="product.extras != undefined">
-                            <div class="form-check" *ngFor="let extra of product.extras; let i = index">
-                                <input class="form-check-input" (change)="checkboxChanged(pi, i ) " type="checkbox">
-                                <label class="form-check-label" for="DefaultCheckbox1 ">
-                                    {{extra.name}}
-                                  </label>
-                            </div>
+    <div class="row">
+        <div class="col-lg-4 py-1" *ngFor="let product of products; let pi = index">
+            <div class="card">
+                <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b>{{product.name}}</b><small> {{pi+1}}</small></h5>
+                    <div *ngIf="product.extras != undefined">
+                        <div class="form-check" *ngFor="let extra of product.extras; let i = index">
+                            <app-extras-checkbox (ExtraChange)="ExtraChange($event, pi, i)" [extra]=extra></app-extras-checkbox>
                         </div>
-                        <div *ngIf="product.extras==undefined ">
-                            <p>Este producto no tiene extras</p>
-                        </div>
-                        <hr>
-                        <p class="card-text "> <b>Precio: ${{prices[pi]}}</b></p>
                     </div>
+                    <div *ngIf="product.extras==undefined ">
+                        <p>Este producto no tiene extras</p>
+                    </div>
+                    <hr>
+                    <p class="card-text "> <b>Precio: ${{prices[pi]}}</b></p>
                 </div>
             </div>
         </div>

@@ -1,37 +1,58 @@
-.card
-{
+.card {
     text-align: center;
     padding: 20px;
-    background-color: #dd7a29;
-    
+    background-color: #151515;
+    color: white;
 }
 
-.row 
-{
+hr {
+    background-color: antiquewhite;
+}
+
+.row {
     padding: 20px;
 }
 
-.btn-dark
-{
+
+/*Botón*/
+
+.btn-dark {
     background-color: #151515;
 }
 
-i
-{
+
+/*Colores de Iconos*/
+
+.fa-search {
     color: #ea7c24;
 }
 
-.fa-edit, .fa-backspace, .fa-pencil-alt, .fa-trash-alt
-{
-    color:white;
+.fa-edit,
+.fa-backspace,
+.fa-pencil-alt,
+.fa-trash-alt {
+    color: white;
 }
 
-img
-{
+
+/*Prop. para imágenes*/
+
+img {
     display: block;
-    width:200px; 
-    height:200px;
+    width: 200px;
+    height: 200px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
+}
+
+.fa-plus-circle,
+.fa-minus-circle {
+    color: white;
+}
+
+.modal-body
+{
+    background-color: #151515;
+    color: white;
 }

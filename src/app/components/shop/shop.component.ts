@@ -103,9 +103,7 @@ PrecioTotal: number;
       this.selectedProducto = this.productos[i];
       //Lleno mi items de Productos para el carrito
       for (let i = 0; i < this.cantidad; i++) {
-        var product = new Product(this.selectedProducto.id, this.selectedProducto.name, this.selectedProducto.price, this.selectedProducto.description, this.selectedProducto.photoUrl,
-          this.selectedProducto.available, this.selectedProducto.cantidad, this.selectedProducto.extras);
-        this.carritoProducts.push(product);
+        this.carritoProducts.push(this.selectedProducto);
       }
     }
     this.personalizeService.updateProducts(this.carritoProducts, this.cantidad);;

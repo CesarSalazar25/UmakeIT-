@@ -16,6 +16,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { PersonalizarComponent } from './components/personalizar/personalizar.component';
+import { ExtrasCheckboxComponent } from './components/extras-checkbox/extras-checkbox.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
@@ -26,7 +28,10 @@ import { AuthModule } from './auth/auth.module';
 //Servicios:
 import { ProductService } from './services/product.service';
 import { CartService } from './services/cart.service';
+import { UserService } from './services/user.service';
+
 //Pipes:
+/*NINGÚN PIPE PERSONALIZADO CREADO*/
 
 //Firebase:
 import { AngularFireModule } from '@angular/fire';
@@ -42,8 +47,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { PersonalizarComponent } from './components/personalizar/personalizar.component';
-
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -58,7 +63,9 @@ import { PersonalizarComponent } from './components/personalizar/personalizar.co
     CarritoComponent,
     ComprasComponent,
     PerfilComponent,
-    PersonalizarComponent
+    PersonalizarComponent,
+    ExtrasCheckboxComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -75,11 +82,12 @@ import { PersonalizarComponent } from './components/personalizar/personalizar.co
     ModalModule.forRoot(),
     TabsModule.forRoot(),
     CarouselModule.forRoot(),
+    ProgressbarModule.forRoot(),
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule
   ],
-  providers: [ProductService, CartService],
+  providers: [ProductService, CartService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
