@@ -13,7 +13,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class PersonalizarComponent implements OnInit {
   
-  products: Product[];
+  products: Product[]=[];
   prices: number[] = [];
   Total: number = 0;
 
@@ -34,9 +34,41 @@ export class PersonalizarComponent implements OnInit {
     }
   }
 
-  getProducts() {
+  /*getProducts() {
    this.products = this.personalizeService.getProducts();
-  }
+  }*/
+
+  getProducts() 
+  {
+    let products = this.personalizeService.getProducts();
+    let index = 0;
+    products.forEach(element => {
+     let extras =[];
+     element.extras.forEach(element => {
+         let extra = {
+           name: element.name,
+           price: element.price,
+           anadido: element.anadido
+         }
+         extras.push(extra);
+     });
+     let newProduct = {
+       id: element.id,
+       name: element.name,
+       price: element.price,
+       description: element.description,
+       photoUrl: element.photoUrl,
+       available: element.available,
+       created_at: element.created_at,
+       cantidad: element.cantidad,
+       extras: extras
+     }
+     this.products.push(newProduct)
+     index= index+1;   
+    });
+   }
+
+
   //Si funciona padre/hijo ELIMINAR ESTA COCHINADA DE MIERDA 
   checkboxChanged(productIndex: number, extraIndex: number){
     console.log(this.prices);
