@@ -11,24 +11,29 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col">Ver</th>
                 <th scope="col">Eliminar</th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let product of cart.products">
+        <tbody *ngIf="cart">
+            <tr *ngFor="let product of cart.products; let i = index">
                 <td>{{product.name | titlecase}}</td>
                 <td>${{product.price}}</td>
                 <td>{{product.qty}}</td>
                 <td>
-                    <button type="button" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
+                    <button type="button" class="btn btn-info">
+                            <i class="far fa-eye"></i>
+                    </button>
+                </td>
+                <td>
+                    <button (click)="Eliminar(product,i)" type="button" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-
 <br>
 <div class="container">
     <p> <b>Precio total: </b>${{total}}</p>
@@ -42,7 +47,7 @@
         <i class="fab fa-paypal fa-2x"></i>
 </button>
 <br> <br>
-<button type="button" class="btn btn-danger">
+<button (click)="clearCart()" type="button" class="btn btn-danger">
         <b>Vaciar carro </b>
             <i class="fas fa-trash fa-2x"></i>
 </button>

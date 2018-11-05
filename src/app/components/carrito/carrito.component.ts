@@ -13,9 +13,11 @@ import { Router } from '@angular/router';
 export class CarritoComponent implements OnInit {
   
   cart: any;
-  total: number;
-  totalIva: number;
+  total: number = 0;
+  iva: number = 0;
+  totalIva: number =0;
   User_id: string;
+  extrasName: string;
 
   constructor(
     private CartService: CartService,
@@ -30,18 +32,26 @@ export class CarritoComponent implements OnInit {
       if(user){
         this.CartService.myCart(user.uid).subscribe(Cart => {
           this.cart = Cart.payload.data();
-          //this.total = this.CartService
           this.User_id = user.uid;
+          this.getTotal();
         })
       }
     })
   }
-  prueba(){
-    console.log(this.cart);
+  getTotal(){
+    this.total = this.CartService.totalPrice(this.cart.products);
+    this.iva = this.total * 0.12;
+    this.totalIva = this.total + this.iva;
   }
-  getCarrito(User_id: string) {
-   this.total = 1111 + 12341 + 100;
-   this.totalIva = this.total + (this.total*0.12);
-   this.cart = this.CartService.myCart(User_id);
+  prueba(){
+    //Boton paypal llama aca
+  }
+
+  Eliminar(product, index){
+    this.CartService.removeProduct(product, this.cart.id, index);
+  }
+  
+  clearCart(){
+    this.CartService.resetCart(this.cart.id);
   }
 }
