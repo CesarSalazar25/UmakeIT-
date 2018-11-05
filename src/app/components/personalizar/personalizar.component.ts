@@ -34,13 +34,16 @@ export class PersonalizarComponent implements OnInit {
     }
   }
 
+  /*getProducts() {
+   this.products = this.personalizeService.getProducts();
+  }*/
+
   getProducts() 
   {
     let products = this.personalizeService.getProducts();
     let index = 0;
     products.forEach(element => {
-     let extras=[];
-     if(element.extras != undefined){
+     let extras =[];
      element.extras.forEach(element => {
          let extra = {
            name: element.name,
@@ -49,7 +52,6 @@ export class PersonalizarComponent implements OnInit {
          }
          extras.push(extra);
      });
-    }
      let newProduct = {
        id: element.id,
        name: element.name,
@@ -65,6 +67,9 @@ export class PersonalizarComponent implements OnInit {
      index= index+1;   
     });
    }
+
+
+  //Si funciona padre/hijo ELIMINAR ESTA COCHINADA DE MIERDA 
   checkboxChanged(productIndex: number, extraIndex: number){
     console.log(this.prices);
     console.log(this.products);
@@ -90,13 +95,11 @@ export class PersonalizarComponent implements OnInit {
       var price = +this.products[productIndex].extras[extraIndex].price;
       this.prices[productIndex] += price;
       this.Total += price;
-      this.products[productIndex].price += price;
     }else {
       this.products[productIndex].extras[extraIndex].anadido = agregado;
       var price = -this.products[productIndex].extras[extraIndex].price;
       this.prices[productIndex] += price;
       this.Total += price;
-      this.products[productIndex].price += price;
     }
     console.log(this.products);
   }

@@ -51,8 +51,6 @@ export class ProductService {
     //  }
      return productsArr;
   }
-
-  
   getProductosDisponible():Observable<Product[]>{
     this.productosDisponible = this.productCollection.snapshotChanges().pipe(map(changes=> {
       return changes.map(action => {

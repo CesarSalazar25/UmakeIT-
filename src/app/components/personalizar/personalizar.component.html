@@ -19,14 +19,14 @@
                 <img class="card-img-top" src='{{product.photoUrl}}' alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><b>{{product.name}}</b><small> {{pi+1}}</small></h5>
-                    <div *ngIf="product.extras.length > 0; else NoProducts">
+                    <div *ngIf="product.extras != undefined">
                         <div class="form-check" *ngFor="let extra of product.extras; let i = index">
                             <app-extras-checkbox (ExtraChange)="ExtraChange($event, pi, i)" [extra]=extra></app-extras-checkbox>
                         </div>
                     </div>
-                    <ng-template #NoProducts>
-                        <p>Este producto no posee extra</p>
-                    </ng-template>
+                    <div *ngIf="product.extras==undefined ">
+                        <p>Este producto no tiene extras</p>
+                    </div>
                     <hr>
                     <p class="card-text "> <b>Precio: ${{prices[pi]}}</b></p>
                 </div>
