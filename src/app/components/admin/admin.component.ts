@@ -85,9 +85,6 @@ export class AdminComponent implements OnInit {
   }
 
   createProduct(form: NgForm){
-    alert(form.value.name);
-    alert(form.value.descripcion);
-    alert(form.value.precio);
     if(form.value.name === ""){
       alert("Debe insertar un nombre");
       return;

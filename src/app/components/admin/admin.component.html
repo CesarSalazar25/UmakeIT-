@@ -151,7 +151,6 @@
 </ng-template>
 
 <!-- Modal para la creacion del producto -->
-
 <ng-template #CreateTemplate>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Formulario para la creación de un producto</h4>
@@ -169,7 +168,8 @@
                     <div class="text-center">
                         <img src="/assets/img/sin-perfil.png" class="img-thumbnail" alt="avatar">
                         <h6>Seleccione la foto para el producto</h6>
-                        <input type="file" (change)="upload($event)" accept=".png,.jpg">
+                        <!-- (change)="upload($event)" -->
+                        <input type="file" accept=".png,.jpg">
 
                     </div>
                 </div>
