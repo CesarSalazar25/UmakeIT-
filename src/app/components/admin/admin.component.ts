@@ -200,6 +200,11 @@ export class AdminComponent implements OnInit {
     this.productService.agregarDisponibildiad(product);
   }
 
+  delet(product: Product)
+  {
+    this.productService.deleteProducto(product);
+  }
+
   search(termino: string){
     //crear la ruta
     console.log(termino);

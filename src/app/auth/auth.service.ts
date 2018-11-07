@@ -12,6 +12,7 @@ import { User } from "../models/user";
 //Observables:
 import {switchMap} from 'rxjs/operators';
 import { Observable , of} from 'rxjs';
+import { UserService } from '../services/user.service';
 
 
 @Injectable()

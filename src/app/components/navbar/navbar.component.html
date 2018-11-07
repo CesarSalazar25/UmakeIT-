@@ -22,7 +22,7 @@
                     <!-- Se cambia el navbar dependiendo del rol del usuario-->
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+                            <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a>

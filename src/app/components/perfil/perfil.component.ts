@@ -6,28 +6,33 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent implements OnInit {
-  user;
+export class PerfilComponent implements OnInit 
+{
+
   uploadProgress: Observable<number>;
   uploadURL: Observable<string>;
-
-  constructor(public auth: AuthService, public afAuth: AngularFireAuth, private firestore: AngularFirestore, private storage: AngularFireStorage) 
-  { }
+  
+  constructor(public auth: AuthService, public user: UserService, public afAuth: AngularFireAuth, private firestore: AngularFirestore, private storage: AngularFireStorage) 
+  { 
+  }
 
   ngOnInit() {}
 
-  updateProfile(form: NgForm){
+  updateProfile(form: NgForm)
+  {
     console.log(form.value);
   }
 
   //Sube una foto desde tu PC y la monta en Firebase Storage:
-  upload(event) {
+  upload(event) 
+  {
     // Obtiene la imagen:
     const file = event.target.files[0];
 
@@ -47,10 +52,12 @@ export class PerfilComponent implements OnInit {
     // Notifica cuando la URL de descarga está disponible:
     task.snapshotChanges().pipe(
       finalize(() => {
-        this.uploadURL = fileRef.getDownloadURL();
-        console.log(this.uploadURL);
+        this.uploadURL = fileRef.getDownloadURL();     
       })
     ).subscribe();
+
+    
+
   }
 
   

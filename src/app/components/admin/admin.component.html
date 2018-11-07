@@ -40,11 +40,15 @@
                     </button>
                     <br><br>
                     <div *ngIf="product.available == true">
-                        <button (click)="removeAvaliable(product)" class="btn btn-danger" type="button">Quitar Disponibilidad
+                        <button (click)="removeAvaliable(product)" class="btn btn-warning" type="button">Quitar Disponibilidad
                             <i class="fas fa-backspace"></i>
                     </button>
                     </div>
                     <div *ngIf="product.available == false">
+                        <button (click)="delet(product)" class="btn btn-danger" type="button"> Borrar
+                                <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <br><br>
                         <button (click)="AddAvaliable(product)" class="btn btn-primary" type="button"> Agregar Disponibilidad
                                 <i class="fas fa-backspace"></i>
                         </button>
@@ -55,7 +59,7 @@
     </div>
 </div>
 
-<!-- Modal para editar el producto que frao -->
+<!-- Modal para editar el producto -->
 <ng-template #Edittemplate>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Formulario de Edición: {{selectedProduct.name}}</h4>
@@ -73,7 +77,34 @@
                     <div class="text-center">
                         <img src={{selectedProduct.photoUrl}} class="img-thumbnail" alt="avatar">
                         <h6>Seleccione una nueva foto</h6>
-                        <input type="file">
+                        <br>
+                    <!--Lo que estaba antes-->
+                    <!--input type="file"-->
+
+                    <!--Para actualizar imagen de producto-->
+                    <!--NO ES IMPLEMENTADO TODAVÍA-->
+                    <div class="container">
+                        <!--Barra de progreso-->
+                        <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+                        <!--Muestra el progreso de la barra-->
+                        <div class="item">
+                                Progress: {{ (uploadProgress | async) / 100 | percent }}
+                        </div>
+                        <br>
+
+                        <!--Se sube una nueva foto para el usuario-->
+                        <div class="item">
+                            <!--Selecciona un archivo .png o .jpg-->
+                            <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg">
+                            <!--Botón para poner en funcionamiento el input-->
+                            <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click()">
+                                Subir foto
+                                <i class="fas fa-upload"></i>
+                            </button>   
+                        </div>
+                    </div>
+
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -102,7 +133,7 @@
                             <div class="col-xs-6">
                                 <!-- agregar navs para cada extra -->
                                 <label><h4>Extras</h4></label>
-                                <button (click)="openModal2(templateNested)" class="btn btn-success btn-sm" type="button">
+                                <button (click)="openModal2(templateNested)" class="btn btn-extra btn-success btn-sm" type="button">
                                             <i class="fas fa-plus-circle"></i>
                                     </button>
                                 <tabset #extraTabs [vertical]="true" type="pills">
@@ -114,8 +145,12 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <br>
-                                    <button class="btn btn-lg btn-primary" (click)="updateProduct(f)" type="submit">Actualizar</button>
-                                    <button class="btn btn-lg btn-default" (click)="decline()">Cancelar</button>
+                                    <button class="btn btn-primary" (click)="updateProduct(f)" type="submit">Actualizar
+                                            <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                    <button class="btn btn-cancelar btn-danger" (click)="decline()">Cancelar
+                                            <i class="far fa-times-circle"></i>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -130,7 +165,7 @@
 <ng-template #templateNested>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Formulario para añadir un extra </h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -146,7 +181,9 @@
             </div>
         </form>
         <button class="btn btn-success" type="submit" (click)="addExtra(k, Edittemplate)">Añadir Extra</button>
-        <button type="button" class="btn btn-danger" (click)="closeSecondModal(Edittemplate)">Cancelar</button>
+        <button type="button" class="btn btn-cancelar btn-danger" (click)="closeSecondModal(Edittemplate)">Cancelar
+                <i class="far fa-times-circle"></i>
+        </button>
     </div>
 </ng-template>
 
@@ -168,8 +205,34 @@
                     <div class="text-center">
                         <img src="/assets/img/sin-perfil.png" class="img-thumbnail" alt="avatar">
                         <h6>Seleccione la foto para el producto</h6>
-                        <!-- (change)="upload($event)" -->
-                        <input type="file" accept=".png,.jpg">
+                        <br>
+                    <!--Lo que estaba antes-->
+                    <!-- (change)="upload($event)" -->
+                    <!--input type="file" accept=".png,.jpg"-->
+
+                    <!--Para actualizar imagen de producto-->
+                    <!--NO ES IMPLEMENTADO TODAVÍA-->
+                    <div class="container">
+                        <!--Barra de progreso-->
+                        <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+                        <!--Muestra el progreso de la barra-->
+                        <div class="item">
+                                Progress: {{ (uploadProgress | async) / 100 | percent }}
+                        </div>
+                        <br>
+
+                        <!--Se sube una nueva foto para el usuario-->
+                        <div class="item">
+                            <!--Selecciona un archivo .png o .jpg-->
+                            <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg">
+                            <!--Botón para poner en funcionamiento el input-->
+                            <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click()">
+                                Subir foto
+                                <i class="fas fa-upload"></i>
+                            </button>   
+                        </div>
+                    </div>
 
                     </div>
                 </div>
@@ -199,7 +262,7 @@
                             <div class="col-xs-6">
                                 <!-- agregar navs para cada extra -->
                                 <label><h4>Extras</h4></label>
-                                <button (click)="openCreateModal2(CreatetemplateNested)" class="btn btn-success btn-sm" type="button">
+                                <button (click)="openCreateModal2(CreatetemplateNested)" class="btn btn-extra btn-success btn-sm" type="button">
                                             <i class="fas fa-plus-circle"></i>
                                     </button>
                                 <tabset #extraTabs [vertical]="true" type="pills">
@@ -211,8 +274,12 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <br>
-                                    <button class="btn btn-lg btn-primary" (click)="createProduct(cf)" type="submit">CrearProducto</button>
-                                    <button class="btn btn-lg btn-default" (click)="declineCreate()">Cancelar</button>
+                                    <button class="btn btn-primary" (click)="createProduct(cf)" type="submit">Crear Producto
+                                            <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                    <button class="btn btn-cancelar btn-danger" (click)="declineCreate()">Cancelar
+                                            <i class="far fa-times-circle"></i>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -242,7 +309,11 @@
                 <input #ExtraPrecio="ngModel" ngModel type="number" class="form-control" name="extraPrecio" id="extraPrecio" placeholder="Precio del extra">
             </div>
         </form>
-        <button class="btn btn-success" type="submit" (click)="addCreateExtra(ck, CreateTemplate)">Añadir Extra</button>
-        <button type="button" class="btn btn-danger" (click)="closeSecondCreateModal(CreateTemplate)">Cancelar</button>
+        <button class="btn btn-success" type="submit" (click)="addCreateExtra(ck, CreateTemplate)">Añadir Extra
+                <i class="fas fa-pencil-alt"></i>
+        </button>
+        <button type="button" class="btn btn-cancelar btn-danger" (click)="closeSecondCreateModal(CreateTemplate)">Cancelar
+                <i class="far fa-times-circle"></i>
+        </button>
     </div>
 </ng-template>
