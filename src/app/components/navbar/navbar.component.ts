@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.auth.User.subscribe(data => {
-      if(data) {
+      if(data){
+      if(data.role == 'customer') {
         const cartRef = this.cartService.myCartRef(data.uid).get();
         cartRef.then((cart) => {
           if(cart.exists) {
@@ -30,6 +31,7 @@ export class NavbarComponent implements OnInit {
           }
         })
       }
+    }
     })
   }
 

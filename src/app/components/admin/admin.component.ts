@@ -5,6 +5,9 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AngularFireStorageReference, AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin',
@@ -24,8 +27,16 @@ export class AdminComponent implements OnInit {
   priceValue;
   newProduct: Product = new Product();
   searchText: string = "";
+  uploadProgress: Observable<number>; 
+  ref: AngularFireStorageReference;
+  downloadURL: Observable<string>;
+  imageUrl: string = null;
 
-  constructor(private productService: ProductService, private modalService: BsModalService, private router: Router) { }
+  constructor(private productService: ProductService, 
+    private modalService: BsModalService, 
+    private router: Router,
+    private storage: AngularFireStorage
+    ) { }
 
   ngOnInit() {
     this.getProducts();
@@ -211,5 +222,27 @@ export class AdminComponent implements OnInit {
     //Recordar crear metodo para suscribirme al observable
     //Recordar css de search
     //this.router.navigate(['/buscar', termino]);
+  }
+
+  upload(event) 
+  {
+    // Obtiene la imagen:
+    const file = event.target.files[0];
+    
+    // Genera un ID random para la imagen:
+    const randomId = Math.random().toString(36).substring(2);
+    const filepath = `Imágenes/user_avatars/${randomId}`;
+    // Cargar imagen:
+    const task = this.storage.upload(filepath, file);
+    this.ref = this.storage.ref(filepath);
+    // Observa los cambios en el % de la barra de progresos:
+    this.uploadProgress = task.percentageChanges();
+    // Notifica cuando la URL de descarga está disponible:
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        this.downloadURL = this.ref.getDownloadURL();  
+        this.downloadURL.subscribe(url => {this.imageUrl = url });
+      })
+    ).subscribe();
   }
 }

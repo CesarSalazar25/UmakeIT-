@@ -98,7 +98,6 @@ export class PersonalizarComponent implements OnInit {
       this.Total += price;
       this.products[productIndex].price += price;
     }
-    console.log(this.products);
   }
 
   anadirCarrito(){
@@ -108,6 +107,7 @@ export class PersonalizarComponent implements OnInit {
     let cantidad = this.personalizeService.cantidad;
     //llenar el carrito con el array de productos
     //Cantidad -> cantidad total de productos
+    console.log(this.products);
     this.cartService.addProduct(this.products, cantidad);
     this.router.navigate(['dashboard/shop']);    
   }

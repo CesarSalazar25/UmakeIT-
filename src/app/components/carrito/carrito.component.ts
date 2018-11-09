@@ -109,13 +109,15 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   }
 
   addPaypalScript(){
-    this.addScript = true;
-    return new Promise((resolve, reject) => {
-      let scriptElement = document.createElement('script');
-      scriptElement.src = 'https://www.paypalobjects.com/api/checkout.js'
-      scriptElement.onload = resolve;
-      document.body.appendChild(scriptElement);
-    })
+    if(this.addScript === false){
+      this.addScript = true;
+      return new Promise((resolve, reject) => {
+        let scriptElement = document.createElement('script');
+        scriptElement.src = 'https://www.paypalobjects.com/api/checkout.js'
+        scriptElement.onload = resolve;
+        document.body.appendChild(scriptElement);
+      })
+    }
   }
 }
   

@@ -38,7 +38,7 @@ export class CartService {
           cartRef.get().then(doc => {
             let cartData = doc.data();
             let productsInCart = cartData.products;
-            for (let i = 0; i < cantidad; i++) {
+            for (let i = 0; i < products.length; i++) {
               if(!isUndefined(products[i].extras)){
                 const productToCart = {
                   id: products[i].id,
