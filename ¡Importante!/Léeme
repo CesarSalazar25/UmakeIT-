@@ -1,0 +1,1 @@
+-Se han tenido que hacer unas modificaciones en los archivos Node_Modules para hacer una función con Storage, por lo que los archivos presentes en esta carpeta deben sustituirse en node_modules/@angular/fire/storage y luego hacer un ng build antes de iniciar la aplicación.
