@@ -18,6 +18,7 @@ import { ComprasComponent } from './components/compras/compras.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { PersonalizarComponent } from './components/personalizar/personalizar.component';
 import { ExtrasCheckboxComponent } from './components/extras-checkbox/extras-checkbox.component';
+import { SearchComponent } from './components/search/search.component';
 
 //Router:
 import { APP_ROUTING } from './app.routes';
@@ -48,7 +49,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { SearchComponent } from './components/search/search.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { SearchComponent } from './components/search/search.component';
     HttpModule,
     APP_ROUTING,
     BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),

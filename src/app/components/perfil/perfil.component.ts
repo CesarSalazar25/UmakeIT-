@@ -56,13 +56,12 @@ export class PerfilComponent implements OnInit
       })
     ).subscribe();
   }
-  prueba(){
+  /*prueba(){
     //Aca le meto el bowe a la imagen :'v 
     //ImageUrl tiene el url de descarga de la imagen, que debe ser asignada luego
-    //Cesar Gay
     console.log(this.imageUrl);
     console.log(this.ref.getMetadata());
     console.log(this.ref);
-    this.ref.delete();
-  }
+    //this.ref.delete();
+  }*/
 }

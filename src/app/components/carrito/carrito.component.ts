@@ -67,7 +67,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
       label: 'paypal',
       size:  'medium',    // small | medium | large | responsive
       shape: 'rect',     // pill | rect
-      color: 'blue',     // gold | blue | silver | black
+      color: 'gold',     // gold | blue | silver | black
       tagline: false      
   },
     client: {

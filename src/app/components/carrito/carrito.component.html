@@ -41,9 +41,14 @@
 </div>
 
 <hr>
-<div id="paypal-checkout-btn"></div>
-<br> <br>
-<button (click)="clearCart()" type="button" class="btn btn-danger">
-        <b>Vaciar carro </b>
-            <i class="fas fa-trash fa-2x"></i>
-</button>
+
+<div class="row">
+    <div class="col-sm-3" id="paypal-checkout-btn"></div>
+    <div class="col-sm-2">
+        <button (click)="clearCart()" type="button" class="btn btn-danger">
+            <b>Vaciar carro </b>
+                <i class="fas fa-trash"></i>
+        </button>
+    </div>
+</div>
+
