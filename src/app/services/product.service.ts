@@ -82,6 +82,7 @@ export class ProductService {
     this.productDoc = this.afs.doc(`products/${product.id}`);
     this.productDoc.update(product);
   }
+  
   //Not even use
   deleteProducto(product: Product){
     this.productDoc = this.afs.doc(`products/${product.id}`);

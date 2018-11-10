@@ -26,7 +26,7 @@ export class UserService {
   }
 
   //Obtener Usuario:
-  getProductos():Observable<User[]>
+  getUsuarios():Observable<User[]>
   {
     this.users = this.userCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(action => {

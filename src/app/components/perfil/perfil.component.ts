@@ -56,12 +56,19 @@ export class PerfilComponent implements OnInit
       })
     ).subscribe();
   }
-  /*prueba(){
+  prueba(){
     //Aca le meto el bowe a la imagen :'v 
     //ImageUrl tiene el url de descarga de la imagen, que debe ser asignada luego
-    console.log(this.imageUrl);
-    console.log(this.ref.getMetadata());
-    console.log(this.ref);
+    //Cesar Gay
+    // console.log(this.imageUrl);
+    // console.log(this.ref.getMetadata());
+    // console.log(this.ref);
     //this.ref.delete();
-  }*/
+  //  this.storage.refFromURL('https://firebasestorage.googleapis.com/v0/b/tupedido-backend.appspot.com/o/Im%C3%A1genes%2Fuser_avatars%2Fgfn5okjmidb?alt=media&token=d81092a8-ea80-43e8-b20a-f593709991d9').delete().toPromise().then( () => {
+  //    alert("Sera que yes ?");
+  //   }).catch( err => {
+  //     alert(err.message);
+  //   })
+  console.log(this.storage.refFromURL(this.imageUrl));
+  }
 }

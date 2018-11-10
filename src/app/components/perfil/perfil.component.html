@@ -22,11 +22,10 @@
             <div class="container">
 
                 <!--Imagen de Perfil-->
-                <div class="img-profile" *ngIf="imageUrl == null">
+                <div class="img-profile">
                     <img class="img-fluid img-circle img-thumbnail profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
                     <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
                 </div>
-                <img class="img-fluid profile-pic" *ngIf="imageUrl" src="{{imageUrl}}">
                 <br>
 
                 <!--Para actualizar/añadir imagen de perfil a un usuario-->
@@ -93,6 +92,10 @@
                                                         Actualizar
                                                 <i class="fas fa-sync-alt"></i>
                                         </button>
+                                        <button (click)="prueba()" class="btn btn-lg btn-success" type="button">
+                                            Prueba
+                                    <i class="fas fa-sync-alt"></i>
+                            </button>
                                     </div>
                                 </div>
                             </form>

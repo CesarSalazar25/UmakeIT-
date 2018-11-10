@@ -39,7 +39,6 @@ PrecioTotal: number;
 
   ngOnInit() {
     this.getProducts();
-
   }
 
   getProducts() {

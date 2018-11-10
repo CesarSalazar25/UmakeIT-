@@ -18,87 +18,25 @@
         </div>
     </nav>
     <!-- Compras se esta llenando a mano. Hay que implementar la coleccion compras en firestore-->
-    <!-- Una vez que se implementen funcionalidades tratar con metodos asyncronos y esperar el llenado del array -->
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Id</th>
                 <th scope="col">Monto ($)</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Ver Detalle</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>2500</td>
-                <td>8/10/2018</td>
-                <td>                    
-                        <button class="btn btn-warning">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>2500</td>
-                <td>8/10/2018</td>
-                <td>                    
-                        <button class="btn btn-warning">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>2500</td>
-                <td>8/10/2018</td>
-                <td>                    
-                        <button class="btn btn-warning">
-                            <i class="far fa-eye"></i>
-                        </button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>2500</td>
-                <td>8/10/2018</td>
-                <td>                    
-                        <button class="btn btn-warning">
-                            <i class="far fa-eye"></i>
-                        </button>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>2500</td>
-                <td>8/10/2018</td>
-                <td>
-                        <button class="btn btn-warning">
-                                <i class="far fa-eye"></i>
-                        </button>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>2500</td>
-                <td>8/10/2018</td>
-                <td>                    
-                    <button class="btn btn-warning">
-                        <i class="far fa-eye"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>2500</td>
-                <td>8/10/2018</td>
+        <tbody *ngIf="orders">
+            <tr *ngFor="let order of orders">
+                <td>{{order.amount}}</td>
+                <td>{{order.created_at}}</td>
                 <td>
                     <button class="btn btn-warning">
-                        <i class="far fa-eye"></i>
-                    </button>
+                            <i class="far fa-eye"></i>
+                        </button>
                 </td>
             </tr>
         </tbody>
     </table>
+    <button (click)="prueba()">Prueba</button>
 </div>

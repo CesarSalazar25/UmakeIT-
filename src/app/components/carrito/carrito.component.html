@@ -35,6 +35,12 @@
     </table>
 </div>
 <br>
+<div *ngIf="cart">
+    <div *ngIf="cart.products.length == 0">
+        <p>Usted no posee items en el carrito</p>
+    </div>
+</div>
+
 <div class="container">
     <p> <b>Precio total: </b>${{total}}</p>
     <p><b>Precio con IVA: </b>${{totalIva}}</p>
@@ -43,12 +49,16 @@
 <hr>
 
 <div class="row">
-    <div class="col-sm-3" id="paypal-checkout-btn"></div>
-    <div class="col-sm-2">
-        <button (click)="clearCart()" type="button" class="btn btn-danger">
-            <b>Vaciar carro </b>
-                <i class="fas fa-trash"></i>
-        </button>
-    </div>
+        <div class="col-sm-3" id="paypal-checkout-btn"></div>
+        <div class="col-sm-2">
+            <button (click)="clearCart()" type="button" class="btn btn-danger">
+                <b>Vaciar carro </b>
+                    <i class="fas fa-trash"></i>
+            </button>
+        </div>
 </div>
 
+<button (click)="PruebaToOrder()" type="button" class="btn btn-dark">
+    <b>prueba</b>
+</button>
+<br> <br>

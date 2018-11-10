@@ -75,8 +75,7 @@
                 <div class="col-sm-6">
                     <!--Foto-->
                     <div class="text-center">
-                        <img *ngIf="imageUrl==null" src={{selectedProduct.photoUrl}} class="img-thumbnail" alt="avatar">
-                        <img class="img-thumbnail" *ngIf="imageUrl" src="{{imageUrl}}">
+                        <img src={{selectedProduct.photoUrl}} class="img-thumbnail" alt="avatar">
                         <h6>Seleccione una nueva foto</h6>
                         <br>
                     <!--Lo que estaba antes-->
@@ -93,10 +92,6 @@
                                 Progress: {{ (uploadProgress | async) / 100 | percent }}
                         </div>
                         <br>
-                        <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
-                            <p>La foto se cargo correctamente</p>
-                        </div>
-                        <br>  
 
                         <!--Se sube una nueva foto para el usuario-->
                         <div class="item">
@@ -208,11 +203,12 @@
                 <div class="col-sm-6">
                     <!--Foto-->
                     <div class="text-center">
-                        <img *ngIf="imageUrl == null" src="/assets/img/sin-perfil.png" class="img-thumbnail">
-                        <img class="img-thumbnail" *ngIf="imageUrl" src="{{imageUrl}}">
+                        <img src="/assets/img/sin-perfil.png" class="img-thumbnail" alt="avatar">
                         <h6>Seleccione la foto para el producto</h6>
-                        <br> 
-
+                        <br>
+                    <!--Lo que estaba antes-->
+                    <!-- (change)="upload($event)" -->
+                    <!--input type="file" accept=".png,.jpg"-->
 
                     <!--Para actualizar imagen de producto-->
                     <!--NO ES IMPLEMENTADO TODAVÍA-->
@@ -225,10 +221,6 @@
                                 Progress: {{ (uploadProgress | async) / 100 | percent }}
                         </div>
                         <br>
-                        <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
-                            <p>La foto se cargo correctamente</p>
-                        </div>
-                        <br>   
 
                         <!--Se sube una nueva foto para el usuario-->
                         <div class="item">

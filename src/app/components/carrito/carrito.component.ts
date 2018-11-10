@@ -4,6 +4,9 @@ import { AuthService } from '../../auth/auth.service';
 import { Cart } from '../../models/cart';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
+import { Order } from 'src/app/models/order';
+import { OrdersService } from 'src/app/services/orders.service';
+import * as moment from 'moment';
 
 declare let paypal: any;
 
@@ -26,7 +29,8 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   constructor(
     private CartService: CartService,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private orderService: OrdersService
   ) { 
 
   }
@@ -47,16 +51,13 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
     this.iva = this.total * 0.12;
     this.totalIva = this.total + this.iva;
   }
-  prueba(){
-    //Boton paypal llama aca
-  }
 
   Eliminar(product, index){
     this.CartService.removeProduct(product, this.cart.id, index);
   }
   
   clearCart(){
-    this.CartService.resetCart(this.cart.id);
+    this.CartService.resetCart(this.User_id);
   }
 
 // Variable paypalConfig
@@ -93,6 +94,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
         // Make a call to the REST api to execute the payment
         return actions.payment.execute().then((payment) => {
             window.alert('Payment Complete!');
+            //CartService.Add()
         })
     }
   };
@@ -109,7 +111,6 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   }
 
   addPaypalScript(){
-    if(this.addScript === false){
       this.addScript = true;
       return new Promise((resolve, reject) => {
         let scriptElement = document.createElement('script');
@@ -117,7 +118,22 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
         scriptElement.onload = resolve;
         document.body.appendChild(scriptElement);
       })
-    }
+  }
+
+  PruebaToOrder(){
+    let order: Order = {
+      id: null,
+      uid: this.User_id,
+      product: this.cart.products,
+      amount: this.totalIva,
+      created_at: moment(new Date).format('DD/MM/YYYY, h:mm:ss a')
+    };
+
+    this.orderService.save(order);
+    this.CartService.resetCart(this.User_id).then(() => {
+      this.router.navigate(['dashboard/compras']);
+      alert("compraExitosa");
+    })
   }
 }
   

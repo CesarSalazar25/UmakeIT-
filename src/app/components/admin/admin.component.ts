@@ -231,7 +231,7 @@ export class AdminComponent implements OnInit {
     
     // Genera un ID random para la imagen:
     const randomId = Math.random().toString(36).substring(2);
-    const filepath = `Imágenes/products/${randomId}`;
+    const filepath = `Imágenes/user_avatars/${randomId}`;
     // Cargar imagen:
     const task = this.storage.upload(filepath, file);
     this.ref = this.storage.ref(filepath);

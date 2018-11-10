@@ -7,18 +7,16 @@
 
     <!--Template para usuario autenticadoe-->
     <ng-template #authenticated>
-
         <div *ngIf="auth.User | async as User">
 
-        <button type="button" class="btn btn-dark" (click)="isCollapsed = !isCollapsed"
+            <button type="button" class="btn btn-dark" (click)="isCollapsed = !isCollapsed"
             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-            <i class="fas fa-angle-double-down" *ngIf="isCollapsed"></i>
-            <i class="fas fa-angle-double-up" *ngIf="!isCollapsed" ></i>
-        </button>
-        <hr>
-         <div id="collapseBasic" [collapse]="isCollapsed">
-
-            <div class="name-user">
+                <i class="fas fa-angle-double-down" *ngIf="isCollapsed"></i>
+                <i class="fas fa-angle-double-up" *ngIf="!isCollapsed" ></i>
+            </button>
+            <hr>
+            <div id="collapseBasic" [collapse]="isCollapsed">
+             <div class="name-user">
                 <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
                 <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
                 <!--Nombre-->
@@ -36,28 +34,27 @@
                         <b>  Cliente</b>
                 </button>
             </div>
+            </div>
             <hr>
-        </div>
-        <br>
-        <button type="button" class="btn btn-dark" [routerLink]="['perfil']" routerLinkActive="active"
-        tooltip="Perfil" placement="right">
-                <i class="fas fa-user-circle" alighn="middle"></i>
-        </button>
-        <br><br>
-        <div *ngIf="User.role === 'customer'">
-                <button type="button" class="btn btn-dark" [routerLink]="['compras']" routerLinkActive="active" 
-                tooltip="Compras" placement="right">
-                       <i class="fas fa-cart-arrow-down"></i>
-               </button>
-               <br><br>               
-        </div>
-        <button type="button" class="btn btn-dark" (click)="auth.signOut()" tooltip="Salir" placement="right">
-                <i class="fas fa-sign-out-alt"></i>
-        </button>
 
-                
-        </div>
+            <br>
+            <button type="button" class="btn btn-dark" [routerLink]="['perfil']" routerLinkActive="active"
+            tooltip="Perfil" placement="right">
+                    <i class="fas fa-user-circle" alighn="middle"></i>
+            </button>
+            <br><br>
+            <div *ngIf="User.role === 'customer'">
+                    <button type="button" class="btn btn-dark" [routerLink]="['compras']" routerLinkActive="active" 
+                    tooltip="Compras" placement="right">
+                           <i class="fas fa-cart-arrow-down"></i>
+                   </button>
+                   <br><br>               
+            </div>
+            <button type="button" class="btn btn-dark" (click)="auth.signOut()" tooltip="Salir" placement="right">
+                    <i class="fas fa-sign-out-alt"></i>
+            </button>
 
+        </div>
     </ng-template>
 
 </nav>
