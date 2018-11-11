@@ -15,7 +15,12 @@
 {
     overflow: hidden;
     background-color:#151515;
+    text-align: center;
+}
 
+.container-fluid
+{
+    color: #ea7c24;
 }
 
 /*Nombre del proyecto*/

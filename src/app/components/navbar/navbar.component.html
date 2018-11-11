@@ -11,7 +11,7 @@
     <div *ngIf="auth.User | async as User">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand  d-md-block" [routerLink]="['/home']">
+                <a class="navbar-brand">
                     <img class="img-fluid logo" alighn="middle" src="/assets/img/logo.png">
                     <b><b>UmakeIT!</b></b>
                 </a>
@@ -22,17 +22,38 @@
                     <!-- Se cambia el navbar dependiendo del rol del usuario-->
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+                            <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                <i class="fas fa-home fa-2x"></i>
+                                <br>
+                                Home
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a>
                         </li>
-                        <li class="nav-item"> <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['carrito']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Carrito({{cart?.totalProducts}})</a> </li>
+                        <li class="nav-item"> 
+                            <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['carrito']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fas fa-shopping-cart fa-2x"></i> 
+                            <span class="badge badge-danger">{{cart?.totalProducts}}</span>
+                            <br>
+                            Carrito
+                            </a> 
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Tienda</a>
+                            <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['shop']" routerLinkActive="active">
+                                <i class="fas fa-shopping-bag fa-2x"></i>
+                                <br>
+                                Tienda
+                            </a>
                         </li>
                     </ul>
                 </div>
+                <ul class="navbar-nav">
+                        <li class="nav-item"> <a class="nav-link" href="https://github.com/CesarSalazar25/UmakeIT-">
+                            <i class="fab fa-github fa-2x"></i>
+                          </a> 
+                        </li>
+                    </ul>
             </div>
         </nav>
     </div>
