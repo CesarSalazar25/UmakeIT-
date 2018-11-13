@@ -92,14 +92,11 @@
                 <div class="col-sm-6">
                     <!--Foto-->
                     <div class="text-center">
-                        <img src={{selectedProduct.photoUrl}} class="img-thumbnail" alt="avatar">
+                        <img *ngIf="this.imageUrl==null" src={{selectedProduct.photoUrl}} class="img-thumbnail" alt="avatar">
+                        <img *ngIf="this.imageUrl!=null" src={{this.imageUrl}} class="img-thumbnail" alt="avatar">
                         <h6>Seleccione una nueva foto</h6>
                         <br>
-                    <!--Lo que estaba antes-->
-                    <!--input type="file"-->
 
-                    <!--Para actualizar imagen de producto-->
-                    <!--NO ES IMPLEMENTADO TODAVÍA-->
                     <div class="container">
                         <!--Barra de progreso-->
                         <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
@@ -220,15 +217,11 @@
                 <div class="col-sm-6">
                     <!--Foto-->
                     <div class="text-center">
-                        <img src="/assets/img/sin-perfil.png" class="img-thumbnail" alt="avatar">
+                        <img *ngIf="this.imageUrl==null" src="/assets/img/sin-perfil.png" class="img-thumbnail" alt="avatar">
+                        <img *ngIf="this.imageUrl!=null" src={{this.imageUrl}} class="img-thumbnail" alt="avatar">
                         <h6>Seleccione la foto para el producto</h6>
                         <br>
-                    <!--Lo que estaba antes-->
-                    <!-- (change)="upload($event)" -->
-                    <!--input type="file" accept=".png,.jpg"-->
 
-                    <!--Para actualizar imagen de producto-->
-                    <!--NO ES IMPLEMENTADO TODAVÍA-->
                     <div class="container">
                         <!--Barra de progreso-->
                         <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
@@ -238,6 +231,7 @@
                                 Progress: {{ (uploadProgress | async) / 100 | percent }}
                         </div>
                         <br>
+                        <button (click)="prueba()">prueba</button>
 
                         <!--Se sube una nueva foto para el usuario-->
                         <div class="item">

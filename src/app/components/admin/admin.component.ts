@@ -32,6 +32,7 @@ export class AdminComponent implements OnInit {
   ref: AngularFireStorageReference;
   downloadURL: Observable<string>;
   imageUrl: string = null;
+  oldimageUrl: string = null;
 
   constructor(private productService: ProductService, 
     private modalService: BsModalService, 
@@ -98,7 +99,15 @@ export class AdminComponent implements OnInit {
     if(form.value.precio != undefined){
       this.selectedProduct.price = +form.value.precio;
     }
+    if(this.imageUrl!=null)
+    {
+      this.oldimageUrl=this.selectedProduct.photoUrl;
+      this.selectedProduct.photoUrl=this.imageUrl;
+      this.deleteImage(this.oldimageUrl);
+      this.imageUrl=null;
+    }
     this.productService.updateProducto(this.selectedProduct);
+    console.log(this.imageUrl);
     this.modalRef.hide();
     this.modalRef = null;
   }
@@ -126,6 +135,21 @@ export class AdminComponent implements OnInit {
         extras: this.newProduct.extras,
       }
     }
+    if(this.imageUrl!=null)
+    {
+
+      var productoNuevo = {
+        name: form.value.name,
+        price: form.value.precio,
+        description: form.value.descripcion,
+        photoUrl: this.imageUrl,
+        available: true,
+        created_at: new Date(),
+        cantidad: 0,
+        extras: this.newProduct.extras,
+      }
+    }
+    this.imageUrl=null;
     this.productService.crearProducto(productoNuevo);
     this.createModalRef.hide();
     this.createModalRef =null;
@@ -204,9 +228,21 @@ export class AdminComponent implements OnInit {
   decline(): void {
 
     this.modalRef.hide();
+    if(this.imageUrl!=null)
+    {
+      this.deleteImage(this.imageUrl);
+      this.imageUrl=null;
+    }
+    this.imageUrl=null;
   }
   declineCreate(){
     this.createModalRef.hide();
+    if(this.imageUrl!=null)
+    {
+      this.deleteImage(this.imageUrl);
+      this.imageUrl=null;
+    }
+    this.imageUrl=null;
   }
   getProducts() {
     this.productService.getProductos().subscribe(productos => this.productos = productos);
@@ -221,7 +257,10 @@ export class AdminComponent implements OnInit {
 
   delet()
   {
+    this.modalRef3.hide();
     this.productService.deleteProducto(this.selectedProduct);
+    this.deleteImage(this.selectedProduct.photoUrl);
+    
   }
 
   search(termino: string){
@@ -239,7 +278,7 @@ export class AdminComponent implements OnInit {
     
     // Genera un ID random para la imagen:
     const randomId = Math.random().toString(36).substring(2);
-    const filepath = `Imágenes/user_avatars/${randomId}`;
+    const filepath = `Imágenes/products/${randomId}`;
     // Cargar imagen:
     const task = this.storage.upload(filepath, file);
     this.ref = this.storage.ref(filepath);
@@ -249,8 +288,18 @@ export class AdminComponent implements OnInit {
     task.snapshotChanges().pipe(
       finalize(() => {
         this.downloadURL = this.ref.getDownloadURL();  
-        this.downloadURL.subscribe(url => {this.imageUrl = url });
+        this.downloadURL.subscribe(url => {this.imageUrl = url} );
       })
     ).subscribe();
   }
+
+  deleteImage(urlToDelete: string)
+  {
+    this.storage.refFromURL(urlToDelete).delete().toPromise().then( () => {
+      // Successfully deleted
+      }).catch( err => {
+        // Handle err
+    });
+  }
+  
 }
