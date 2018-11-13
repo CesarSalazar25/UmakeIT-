@@ -29,14 +29,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Administración</a>
+                            <a class="nav-link" *ngIf="User.role === 'admin'" [routerLink]="['admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                <i class="fas fa-toolbox fa-2x"></i>
+                                <br>
+                                Administración
+                            </a>
                         </li>
                         <li class="nav-item"> 
                             <a class="nav-link" *ngIf="User.role === 'customer'" [routerLink]="['carrito']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                            <i class="fas fa-shopping-cart fa-2x"></i> 
-                            <span class="badge badge-danger">{{cart?.totalProducts}}</span>
-                            <br>
-                            Carrito
+                                <i class="fas fa-shopping-cart fa-2x"></i> 
+                                <span class="badge badge-danger">{{cart?.totalProducts}}</span>
+                                <br>
+                                Carrito
                             </a> 
                         </li>
                         <li class="nav-item">

@@ -45,7 +45,7 @@
                     </button>
                     </div>
                     <div *ngIf="product.available == false">
-                        <button (click)="delet(product)" class="btn btn-danger" type="button"> Borrar
+                        <button (click)="openModal3(Confirmtemplate, product)" class="btn btn-danger" type="button"> Borrar
                                 <i class="fas fa-trash-alt"></i>
                         </button>
                         <br><br>
@@ -58,6 +58,23 @@
         </div>
     </div>
 </div>
+
+<!--Modal para confirmar la eliminación del producto-->
+<ng-template #Confirmtemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Confirmar acción</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef3.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      ¿Desea borrar de forma permanente el producto seleccionado?
+      <br><br>
+      <button (click)="delet()" class="btn btn-success" type="button">Sí</button>
+      <button (click)="modalRef3.hide()" class="btn btn-danger btn-cancelar" type="button">No</button>
+    </div>
+  </ng-template>
+
 
 <!-- Modal para editar el producto -->
 <ng-template #Edittemplate>

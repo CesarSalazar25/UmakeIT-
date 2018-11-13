@@ -38,7 +38,5 @@ getOrders() {
   trackById(index, order: Order){
     return order.id;
   }
-  prueba(){
-    console.log(this.orders);
-  }
+
 }

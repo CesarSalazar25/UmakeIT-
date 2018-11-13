@@ -5,3 +5,15 @@ table {
 .inner {
     text-align: center;
 }
+
+.modal-header
+{
+    background: #ea7c24;
+    color: white;
+}
+
+.modal-body
+{
+    background-color: #151515;
+    color: white;
+}

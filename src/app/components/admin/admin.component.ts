@@ -19,6 +19,7 @@ export class AdminComponent implements OnInit {
   productos: Product[];
   modalRef: BsModalRef;
   modalRef2: BsModalRef;
+  modalRef3: BsModalRef;
   createModalRef: BsModalRef;
   createModalRef2: BsModalRef;
   selectedProduct: Product;
@@ -50,6 +51,7 @@ export class AdminComponent implements OnInit {
     this.createModalRef = this.modalService.show(template, {class: 'modal-lg'})
   }
   openModal(template: TemplateRef<any>, editProduct: Product) {
+    console.log(editProduct);
     this.selectedProduct = editProduct;
     this.nameValue=this.selectedProduct.name;
     this.descriptionValue = this.selectedProduct.description;
@@ -78,6 +80,12 @@ export class AdminComponent implements OnInit {
     this.modalRef2.hide();
     this.modalRef2 = null;
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+  }
+
+  openModal3(template: TemplateRef<any>, product: Product) {
+    this.modalRef3 = this.modalService.show(template);
+    this.modalRef3.hide();
+    this.selectedProduct = product;
   }
 
   updateProduct(form: NgForm){
@@ -211,9 +219,9 @@ export class AdminComponent implements OnInit {
     this.productService.agregarDisponibildiad(product);
   }
 
-  delet(product: Product)
+  delet()
   {
-    this.productService.deleteProducto(product);
+    this.productService.deleteProducto(this.selectedProduct);
   }
 
   search(termino: string){

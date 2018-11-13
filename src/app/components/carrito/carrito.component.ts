@@ -1,6 +1,8 @@
-import { Component, OnInit, AfterViewChecked} from '@angular/core';
+import { Component, OnInit, AfterViewChecked, TemplateRef} from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../auth/auth.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Cart } from '../../models/cart';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
@@ -25,12 +27,14 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   extrasName: string;
   paypalLoad: boolean = true;
   addScript: boolean = false;
+  modalRef: BsModalRef;
 
   constructor(
     private CartService: CartService,
     public auth: AuthService,
     private router: Router,
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private modalService: BsModalService
   ) { 
 
   }
@@ -58,6 +62,11 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   
   clearCart(){
     this.CartService.resetCart(this.User_id);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+    this.modalRef.hide();
   }
 
 // Variable paypalConfig
@@ -94,7 +103,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
         // Make a call to the REST api to execute the payment
         return actions.payment.execute().then((payment) => {
             window.alert('Payment Complete!');
-            //CartService.Add()
+            this.PruebaToOrder();
         })
     }
   };
@@ -136,4 +145,3 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
     })
   }
 }
-  
