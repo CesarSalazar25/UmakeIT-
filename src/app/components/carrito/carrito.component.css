@@ -2,7 +2,7 @@ table {
     text-align: center;
 }
 
-.inner {
+.inner, alert {
     text-align: center;
 }
 

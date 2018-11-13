@@ -1,4 +1,4 @@
-table
+table, alert
 {
     text-align: center;
 }
@@ -8,7 +8,24 @@ i
     color: #ea7c24;
 }
 
-.fa-eye
+.fa-eye, .fa-reply
 {
+    color: white;
+}
+
+hr
+{
+    background-color: antiquewhite;
+}
+
+.modal-header
+{
+    background: #ea7c24;
+    color: white;
+}
+
+.modal-body
+{
+    background-color: #151515;
     color: white;
 }

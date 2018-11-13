@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Order } from 'src/app/models/order';
@@ -14,9 +16,10 @@ import { Observable } from 'rxjs';
 export class ComprasComponent implements OnInit {
 
   orders: Order[];
+  modalRef: BsModalRef;
   constructor(
     private ordersService: OrdersService,
-    private auth: AuthService) {}
+    private auth: AuthService, private modalService: BsModalService) {}
 
   ngOnInit() {
     this.getOrders();
@@ -37,6 +40,11 @@ getOrders() {
 
   trackById(index, order: Order){
     return order.id;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+    this.modalRef.hide();
   }
 
 }

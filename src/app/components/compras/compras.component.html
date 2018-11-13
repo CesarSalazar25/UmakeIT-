@@ -31,11 +31,48 @@
                 <td>{{order.amount}}</td>
                 <td>{{order.created_at}}</td>
                 <td>
-                    <button class="btn btn-warning">
+                    <button class="btn btn-warning" (click)="openModal(template)">
                             <i class="far fa-eye"></i>
-                        </button>
+                    </button>
+
+                    <ng-template #template>
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Detalles de la Compra</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                                <b>ID de la transacción:</b> {{order.id}}
+                                <hr>
+                                <strong>Productos Pedidos:</strong>
+                                <br><br>
+                                <div *ngFor="let product of order.product; let i index">
+                                    <b>Nombre:</b> {{product.name}}
+                                    <br>
+                                    <b>Precio:</b> {{product.price}}
+                                    <br>
+                                    <b>Extras:</b>
+                                    <ul class="list-unstyled">
+                                        <ul *ngFor="let extra of product.extras; let i = index">
+                                                <li *ngIf="extra.anadido" >{{extra.name | titlecase}}: ${{extra.price}}</li>
+                                        </ul>
+                                    </ul>
+                                    <br>
+                                    <hr>
+                                </div>
+
+                        </div>
+                    </ng-template>
+
                 </td>
             </tr>
         </tbody>
     </table>
+    <br><br>
+    <button type="button" [routerLink]="['shop']" routerLinkActive="active" class="btn btn-danger">
+            <i class="fas fa-reply"></i>
+        <b>  Volver a la Tienda</b>
+    </button>
+    <br><br>
 </div>
