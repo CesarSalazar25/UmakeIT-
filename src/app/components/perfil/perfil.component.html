@@ -23,8 +23,9 @@
 
                 <!--Imagen de Perfil-->
                 <div class="img-profile">
-                    <img class="img-fluid img-circle img-thumbnail profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
-                    <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
+                    <img class="img-fluid img-circle img-thumbnail profile-pic" *ngIf="User.photoUrl && this.imageUrl==null" src="{{User.photoUrl}}">
+                    <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null && this.imageUrl==null" src="/assets/img/sin-perfil.png">
+                    <img class="img-fluid profile-pic" *ngIf="this.imageUrl!=null" src={{this.imageUrl}} class="img-thumbnail" alt="avatar">
                 </div>
                 <br>
 
@@ -39,7 +40,7 @@
                     </div>
                     <br>
                     <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
-                        <p>La foto se cargo correctamente</p>
+                        <p>La foto se cargó correctamente</p>
                     </div>
                     <br>
                     <!--Se sube una nueva foto para el usuario-->
@@ -72,30 +73,30 @@
                                         <input type="email" class="form-control" name="email" id="email" placeholder="{{User.email}}">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!--div class="form-group">
                                     <div class="col-xs-6">
                                         <label for="password"><h4>Password</h4></label>
                                         <input type="password" class="form-control" name="password" id="password" placeholder="password">
                                     </div>
-                                </div>
-                                <div class="form-group">
+                                </div-->
+                                <!--div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="password2"><h4>Confirmar Password</h4></label>
                                         <input type="password" class="form-control" name="password2" id="password2" placeholder="password">
                                     </div>
-                                </div>
+                                </div-->
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <br>
-                                        <button class="btn btn-lg btn-success" type="submit">
+                                        <button (click)="updateProfile(f)" class="btn btn-lg btn-success" type="submit">
                                                         Actualizar
                                                 <i class="fas fa-sync-alt"></i>
                                         </button>
-                                        <button (click)="prueba()" class="btn btn-lg btn-success" type="button">
+                                        <button (click)="prueba()" class="btn btn-lg btn-success" type="submit">
                                             Prueba
-                                    <i class="fas fa-sync-alt"></i>
-                            </button>
+                                             <i class="fas fa-sync-alt"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </form>

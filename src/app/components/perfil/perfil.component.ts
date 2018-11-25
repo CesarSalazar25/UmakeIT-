@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 import { TouchSequence } from 'selenium-webdriver';
+import { User } from '../../models/user';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-perfil',
@@ -21,16 +23,38 @@ export class PerfilComponent implements OnInit
   ref: AngularFireStorageReference;
   downloadURL: Observable<string>;
   imageUrl: string = null;
+  oldimageUrl: string = null;
+  selectedUser: User;
 
   constructor(public auth: AuthService, public user: UserService, public afAuth: AngularFireAuth, private firestore: AngularFirestore, private storage: AngularFireStorage) 
   { 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.auth.User.subscribe(user => { this.selectedUser = user });
+  }
 
   updateProfile(form: NgForm)
   {
 
+    if(form.value.name != ""){
+      console.log(form.value.name);
+      this.selectedUser.name = form.value.name;
+    }
+
+    if(this.imageUrl!=null)
+    {
+      this.oldimageUrl=this.selectedUser.photoUrl;
+      this.selectedUser.photoUrl=this.imageUrl;
+      this.deleteImage(this.oldimageUrl);
+      this.imageUrl=null;
+    }
+    console.log(this.selectedUser);
+    this.user.updateUser(this.selectedUser);
   }
 
   upload(event) 
@@ -56,19 +80,19 @@ export class PerfilComponent implements OnInit
       })
     ).subscribe();
   }
-  prueba(){
-    //Aca le meto el bowe a la imagen :'v 
-    //ImageUrl tiene el url de descarga de la imagen, que debe ser asignada luego
-    //Cesar Gay
-    // console.log(this.imageUrl);
-    // console.log(this.ref.getMetadata());
-    // console.log(this.ref);
-    //this.ref.delete();
-  //  this.storage.refFromURL('https://firebasestorage.googleapis.com/v0/b/tupedido-backend.appspot.com/o/Im%C3%A1genes%2Fuser_avatars%2Fgfn5okjmidb?alt=media&token=d81092a8-ea80-43e8-b20a-f593709991d9').delete().toPromise().then( () => {
-  //    alert("Sera que yes ?");
-  //   }).catch( err => {
-  //     alert(err.message);
-  //   })
-  console.log(this.storage.refFromURL(this.imageUrl));
+
+  deleteImage(urlToDelete: string)
+  {
+    this.storage.refFromURL(urlToDelete).delete().toPromise().then( () => {
+      // Successfully deleted
+      }).catch( err => {
+        // Handle err
+    });
   }
+
+  prueba()
+  {
+    console.log(this.selectedUser);
+  }
+
 }

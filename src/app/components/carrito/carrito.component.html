@@ -36,9 +36,17 @@
                                 <b>Extras añadidos:</b>
                                 <br><br>
                                 <ul class="list-unstyled">
-                                    <ul *ngFor="let extra of product.extras; let i = index">
-                                        <li *ngIf="extra.anadido" >{{extra.name | titlecase}}: ${{extra.price}}</li>
-                                    </ul>
+                                    <!--Producto sin extras asociados-->
+                                    <div *ngIf="product.extras.length == 0">
+                                            <li>No hay extras añadidos a la orden</li>
+                                    </div>
+                                    <!--Productos con extras asociados-->
+                                    <div  *ngIf="product.extras.length > 0">
+                                        <ul *ngFor="let extra of product.extras; let i = index">
+                                            <li *ngIf="extra.anadido" >{{extra.name | titlecase}}: ${{extra.price}}</li>
+                                        </ul>
+                                    </div>
+                                    
                                 </ul>
                                 
                             </div>     
