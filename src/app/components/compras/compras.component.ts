@@ -3,10 +3,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Order } from 'src/app/models/order';
-import { Product } from 'src/app/models/product';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-compras',
@@ -14,37 +12,51 @@ import { Observable } from 'rxjs';
   styleUrls: ['./compras.component.css']
 })
 export class ComprasComponent implements OnInit {
-
-  orders: Order[];
+  isCollapsed = true;
+  orders: any
   modalRef: BsModalRef;
+  searchterm: string = "";
+  startAt = new Subject();
+  endAt = new Subject();
+  startObs = this.startAt.asObservable();
+  endObs = this.endAt.asObservable();
+
   constructor(
     private ordersService: OrdersService,
-    private auth: AuthService, private modalService: BsModalService) {}
+    private auth: AuthService, 
+    private modalService: BsModalService,
+    private afs: AngularFirestore) {}
 
   ngOnInit() {
     this.getOrders();
 }
 getOrders() {
   this.auth.User.subscribe(user => {
-    if(user.role == 'customer'){
+    if(user){
       this.ordersService.getorders(user.uid).subscribe(orders => this.orders = orders);
-    }else{
-      this.ordersService.getorders().subscribe(orders => this.orders = orders);
+      combineLatest(this.startObs, this.endObs).subscribe((value) => {
+        this.firequery(value[0], value[1], user.uid).subscribe((ordenes) => {
+          this.orders = ordenes;
+        })
+      })
     }
   })
 }
-  applyFilter(filterValue: string){
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-  }
-
-  trackById(index, order: Order){
-    return order.id;
-  }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.modalRef.hide();
   }
-
+  search(event){
+    const q = event;
+    if(q!==null){
+      this.startAt.next(q);
+      this.endAt.next(q + '\uf8ff');
+    }else{
+      this.getOrders();
+    }
+  }
+  firequery(start,end, uid){
+    return this.afs.collection('orders', ref => ref.orderBy('created_at').where("uid", "==", uid).where("created_at", ">=", start)).valueChanges();  
+  }
 }

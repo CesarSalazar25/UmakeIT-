@@ -5,6 +5,7 @@ import { Cart } from "../models/cart";
 import { Product } from "../models/product";
 import { reject } from 'q';
 import { isUndefined, isNullOrUndefined } from 'util';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class CartService {
   
   constructor(
     public auth: AuthService,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private productService: ProductService
   ) { }
 
   createCart(id){
@@ -161,6 +163,46 @@ export class CartService {
           reject(err);
         })
       })
+    })
+  }
+
+  GetChangesOnCart(uid: string){
+    return new Promise((resolve, reject) => {
+          const cartRef = this.myCartRef(uid);
+          cartRef.get().then(doc => {
+            let cartData = doc.data();
+            //cartData.products es un array
+            for(let i = 0; i < cartData.products.length; i++){
+              let cartProduct = cartData.products[i];
+              this.productService.getProducto(cartProduct.id).subscribe(product => {
+                if(!isNullOrUndefined(product)){
+                  if(product.available == true){
+                    cartProduct.name = product.name;
+                    cartProduct.price = product.price;
+                    if(!isNullOrUndefined(product.extras)){
+                      cartProduct.extras = product.extras
+                    }else {
+                      cartProduct.extras = []
+                    }
+                  }else {
+                    //Eliminar ese producto
+                    this.removeProduct(cartProduct, uid, i);
+                  }
+                }else {
+                  //Eliminar ese producto
+                  this.removeProduct(cartProduct, uid, i);
+                }
+                if((i+1) == cartData.products.length){
+                  console.log("llegue");
+                  return cartRef.update(cartData).then(() => {
+                    resolve(true);
+                  }).catch((err) => {
+                    reject(err);
+                  })
+                }
+              });
+            };
+          })
     })
   }
 }

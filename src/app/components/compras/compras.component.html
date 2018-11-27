@@ -1,23 +1,22 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand"> <b>Dashboard > Compras</b> </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" [collapse]="isCollapsed" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <!--Solo para que el search quede a la izquierda-->
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Filtrar por fecha" aria-label="Search">
+                <input class="form-control mr-sm-2" [(ngModel)]="searchterm" (ngModelChange)="search($event)" type="search" placeholder="Filtrar por fecha" aria-label="Search" name="search">
                 <button class="btn btn-dark my-2 my-sm-0" type="submit">
                         <i class="fas fa-search"></i>
                 </button>
             </form>
         </div>
     </nav>
-    <!-- Compras se esta llenando a mano. Hay que implementar la coleccion compras en firestore-->
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -43,24 +42,24 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                                <b>ID de la transacción:</b> {{order.id}}
-                                <hr>
-                                <strong>Productos Pedidos:</strong>
-                                <br><br>
-                                <div *ngFor="let product of order.product; let i index">
-                                    <b>Nombre:</b> {{product.name}}
-                                    <br>
-                                    <b>Precio:</b> {{product.price}}
-                                    <br>
-                                    <b>Extras:</b>
-                                    <ul class="list-unstyled">
-                                        <ul *ngFor="let extra of product.extras; let i = index">
-                                                <li *ngIf="extra.anadido" >{{extra.name | titlecase}}: ${{extra.price}}</li>
-                                        </ul>
+                            <b>ID de la transacción:</b> {{order.id}}
+                            <hr>
+                            <strong>Productos Pedidos:</strong>
+                            <br><br>
+                            <div *ngFor="let product of order.product; let i index">
+                                <b>Nombre:</b> {{product.name}}
+                                <br>
+                                <b>Precio:</b> {{product.price}}
+                                <br>
+                                <b>Extras:</b>
+                                <ul class="list-unstyled">
+                                    <ul *ngFor="let extra of product.extras; let i = index">
+                                        <li *ngIf="extra.anadido">{{extra.name | titlecase}}: ${{extra.price}}</li>
                                     </ul>
-                                    <br>
-                                    <hr>
-                                </div>
+                                </ul>
+                                <br>
+                                <hr>
+                            </div>
 
                         </div>
                     </ng-template>
@@ -69,6 +68,14 @@
             </tr>
         </tbody>
     </table>
+    <!-- <div *ngIf="orders">
+        <div *ngIf="orders.length == 0">
+            <alert type="info">
+                <strong>Usted no posee ordenes</strong>
+            </alert>
+        </div>
+    </div> -->
+
     <br><br>
     <button type="button" [routerLink]="['shop']" routerLinkActive="active" class="btn btn-danger">
             <i class="fas fa-reply"></i>

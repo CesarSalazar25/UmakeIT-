@@ -18,7 +18,8 @@ declare let paypal: any;
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit, AfterViewChecked {
-  
+
+
   cart: any;
   total: number = 0;
   iva: number = 0;
@@ -42,14 +43,17 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.auth.User.subscribe(user => {
       if(user){
-        this.CartService.myCart(user.uid).subscribe(Cart => {
-          this.cart = Cart.payload.data();
-          this.User_id = user.uid;
-          this.getTotal();
+        this.CartService.GetChangesOnCart(user.uid).then(() => {
+          this.CartService.myCart(user.uid).subscribe(Cart => {
+            this.cart = Cart.payload.data();
+            this.User_id = user.uid;
+            this.getTotal();
+          })
         })
       }
     })
   }
+
   getTotal(){
     this.total = this.CartService.totalPrice(this.cart.products);
     this.iva = this.total * 0.12;
@@ -135,7 +139,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
       uid: this.User_id,
       product: this.cart.products,
       amount: this.totalIva,
-      created_at: moment(new Date).format('DD/MM/YYYY, h:mm:ss a')
+      created_at: moment(new Date).format('DD/MM/YYYY')
     };
 
     this.orderService.save(order);

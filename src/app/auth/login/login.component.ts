@@ -32,7 +32,6 @@ export class LoginComponent {
     const email = form.value.email;
     const password = form.value.password;
     this.auth.emailAndPassword(email, password).then(credentials => {
-      console.log(credentials.user.email);
       this.router.navigate(['/dashboard/home'])
 
     }).catch(err => {

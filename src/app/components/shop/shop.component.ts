@@ -9,6 +9,8 @@ import { Router} from "@angular/router";
 import { AuthService } from '../../auth/auth.service';
 import { CartService } from '../../services/cart.service';
 import { PersonalizeService } from '../../services/personalize.service';
+import { Subject, combineLatest } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-shop',
@@ -16,15 +18,22 @@ import { PersonalizeService } from '../../services/personalize.service';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-productos: Product[];
-selectedProducto: Product;
-quantity: number;
-modalRef: BsModalRef;
-cantidad: number;
-carritoProducts: Product[] = [];
-carritoExtras: Extras[][] = [];
-ExtraTest: Extras[];
-PrecioTotal: number; 
+
+  isCollapsed = true;
+  productos;
+  selectedProducto: Product;
+  quantity: number;
+  modalRef: BsModalRef;
+  cantidad: number;
+  carritoProducts: Product[] = [];
+  carritoExtras: Extras[][] = [];
+  ExtraTest: Extras[];
+  PrecioTotal: number; 
+  searchterm: string = "";
+  startAt = new Subject();
+  endAt = new Subject();
+  startObs = this.startAt.asObservable();
+  endObs = this.endAt.asObservable();
 
 @ViewChild('carousel') carousel: CarouselComponent;
 
@@ -34,11 +43,17 @@ PrecioTotal: number;
     public router: Router,
     public auth: AuthService,
     public cartService: CartService,
-    public personalizeService: PersonalizeService
+    public personalizeService: PersonalizeService,
+    public afs: AngularFirestore
   ) { }
 
   ngOnInit() {
     this.getProducts();
+    combineLatest(this.startObs, this.endObs).subscribe((value) => {
+      this.firequery(value[0], value[1]).subscribe((comidas) => {
+        this.productos = comidas;
+      })
+    })
   }
 
   getProducts() {
@@ -107,5 +122,18 @@ PrecioTotal: number;
     }
     this.personalizeService.updateProducts(this.carritoProducts, this.cantidad);;
     this.router.navigate(['dashboard/personalize']);
+  }
+
+  search(event){
+    const q = event;
+    if(q!==null){
+      this.startAt.next(q);
+      this.endAt.next(q + '\uf8ff');
+    }else{
+      this.getProducts();
+    }
+  }
+  firequery(start,end){
+    return this.afs.collection('products', ref => ref.orderBy('name').where("available", "==", true).startAt(start).endAt(end)).valueChanges();  
   }
 }

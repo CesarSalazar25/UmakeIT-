@@ -25,33 +25,33 @@
                             <i class="far fa-eye"></i>
                     </button>
                     <!--Modal que muestra detalles del pedido-->
-                        <ng-template #template>
-                            <div class="modal-header">
+                    <ng-template #template>
+                        <div class="modal-header">
                             <h4 class="modal-title pull-left">Detalles del Pedido</h4>
                             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            </div>
-                            <div class="modal-body">
-                                <b>Extras añadidos:</b>
-                                <br><br>
-                                <ul class="list-unstyled">
-                                    <!--Producto sin extras asociados-->
-                                    <div *ngIf="product.extras.length == 0">
-                                            <li>No hay extras añadidos a la orden</li>
-                                    </div>
-                                    <!--Productos con extras asociados-->
-                                    <div  *ngIf="product.extras.length > 0">
-                                        <ul *ngFor="let extra of product.extras; let i = index">
-                                            <li *ngIf="extra.anadido" >{{extra.name | titlecase}}: ${{extra.price}}</li>
-                                        </ul>
-                                    </div>
-                                    
-                                </ul>
-                                
-                            </div>     
-                        </ng-template>
-    
+                        </div>
+                        <div class="modal-body">
+                            <b>Extras añadidos:</b>
+                            <br><br>
+                            <ul class="list-unstyled">
+                                <!--Producto sin extras asociados-->
+                                <div *ngIf="product.extras.length == 0">
+                                    <li>No hay extras añadidos a la orden</li>
+                                </div>
+                                <!--Productos con extras asociados-->
+                                <div *ngIf="product.extras.length > 0">
+                                    <ul *ngFor="let extra of product.extras; let i = index">
+                                        <li *ngIf="extra.anadido">{{extra.name | titlecase}}: ${{extra.price}}</li>
+                                    </ul>
+                                </div>
+
+                            </ul>
+
+                        </div>
+                    </ng-template>
+
                 </td>
                 <td>
                     <button (click)="Eliminar(product,i)" type="button" class="btn btn-danger">
@@ -65,9 +65,9 @@
 <br>
 <div *ngIf="cart">
     <div *ngIf="cart.products.length == 0">
-            <alert type="info">
-                <strong>Usted no posee items en el carrito</strong>
-            </alert>
+        <alert type="info">
+            <strong>Usted no posee items en el carrito</strong>
+        </alert>
     </div>
 </div>
 
@@ -80,14 +80,12 @@
 
 
 <div class="row">
-        <div class="col-sm-3" id="paypal-checkout-btn"></div>
-        <div class="col-sm-2">
-            <button (click)="clearCart()" type="button" class="btn btn-danger">
+    <div class="col-sm-3" id="paypal-checkout-btn"></div>
+    <div class="col-sm-2">
+        <button (click)="clearCart()" type="button" class="btn btn-danger">
                 <b>Vaciar carro </b>
                     <i class="fas fa-trash"></i>
             </button>
-        </div>
+    </div>
 </div>
 <br> <br>
-
-
