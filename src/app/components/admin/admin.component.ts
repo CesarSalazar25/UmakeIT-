@@ -6,8 +6,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 import { AngularFireStorageReference, AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +18,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class AdminComponent implements OnInit {
 
-  productos: Product[];
+  productos;
   modalRef: BsModalRef;
   modalRef2: BsModalRef;
   modalRef3: BsModalRef;
@@ -33,15 +35,26 @@ export class AdminComponent implements OnInit {
   downloadURL: Observable<string>;
   imageUrl: string = null;
   oldimageUrl: string = null;
+  searchterm: string = "";
+  startAt = new Subject();
+  endAt = new Subject();
+  startObs = this.startAt.asObservable();
+  endObs = this.endAt.asObservable();
 
   constructor(private productService: ProductService, 
     private modalService: BsModalService, 
     private router: Router,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    public afs: AngularFirestore
     ) { }
 
   ngOnInit() {
     this.getProducts();
+    combineLatest(this.startObs, this.endObs).subscribe((value) => {
+      this.firequery(value[0], value[1]).subscribe((comidas) => {
+        this.productos = comidas;
+      })
+    })
   }
 
   openCreateModal(template: TemplateRef<any>){
@@ -87,6 +100,7 @@ export class AdminComponent implements OnInit {
     this.modalRef3 = this.modalService.show(template);
     this.modalRef3.hide();
     this.selectedProduct = product;
+    console.log(this.selectedProduct);
   }
 
   updateProduct(form: NgForm){
@@ -258,18 +272,23 @@ export class AdminComponent implements OnInit {
   delet()
   {
     this.modalRef3.hide();
-    this.productService.deleteProducto(this.selectedProduct);
+    var productoEliminar ={
+      id: this.selectedProduct.id,
+      name: this.selectedProduct.name,
+      price: this.selectedProduct.price,
+      description: this.selectedProduct.description,
+      photoUrl: this.selectedProduct.photoUrl,
+      available: true,
+      created_at: new Date(),
+      cantidad: 0,
+      extras: this.selectedProduct.extras
+    }
+
+    this.productService.deleteProducto(productoEliminar);
     this.deleteImage(this.selectedProduct.photoUrl);
     
   }
 
-  search(termino: string){
-    //crear la ruta
-    console.log(termino);
-    //Recordar crear metodo para suscribirme al observable
-    //Recordar css de search
-    //this.router.navigate(['/buscar', termino]);
-  }
 
   upload(event) 
   {
@@ -300,6 +319,21 @@ export class AdminComponent implements OnInit {
       }).catch( err => {
         // Handle err
     });
+  }
+
+  search(event){
+    const q = event;
+    if(q!==null){
+      this.startAt.next(q);
+      this.endAt.next(q + '\uf8ff');
+    }else{
+      this.getProducts();
+    }
+  }
+
+  firequery(start,end){
+    return this.afs.collection('products', ref => ref.orderBy('name')
+    .startAt(start).endAt(end)).valueChanges();  
   }
   
 }

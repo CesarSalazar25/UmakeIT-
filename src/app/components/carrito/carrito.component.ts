@@ -43,13 +43,11 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.auth.User.subscribe(user => {
       if(user){
-        this.CartService.GetChangesOnCart(user.uid).then(() => {
           this.CartService.myCart(user.uid).subscribe(Cart => {
             this.cart = Cart.payload.data();
             this.User_id = user.uid;
             this.getTotal();
           })
-        })
       }
     })
   }

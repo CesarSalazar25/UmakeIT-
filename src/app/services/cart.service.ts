@@ -180,7 +180,8 @@ export class CartService {
                     cartProduct.name = product.name;
                     cartProduct.price = product.price;
                     if(!isNullOrUndefined(product.extras)){
-                      cartProduct.extras = product.extras
+                      //cartProduct.extras = product.extras
+
                     }else {
                       cartProduct.extras = []
                     }

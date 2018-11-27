@@ -16,11 +16,11 @@
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input #SearchText (keyup.enter)="search(SearchText.value)" name="search" class="form-control mr-sm-2" type="search" placeholder="Búsqueda" aria-label="Search">
-            <button (click)="search(SearchText.value)" class="btn btn-dark my-2 my-sm-0" type="submit">
+                <input class="form-control mr-sm-2" [(ngModel)]="searchterm" (ngModelChange)="search($event)" type="search" placeholder="Búsqueda" aria-label="Search" name="searchInput">
+                <button class="btn btn-dark my-2 my-sm-0" type="submit">
                     <i class="fas fa-search"></i>
-            </button>
-        </form>
+                </button>
+            </form>
     </div>
 </nav>
 
