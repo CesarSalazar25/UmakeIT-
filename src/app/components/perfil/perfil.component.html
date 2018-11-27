@@ -64,38 +64,33 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <label for="first_name"><h4>Nombre</h4></label>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="{{User.name | titlecase}}">
+                                        <input #name type="text" class="form-control" name="name" id="name" placeholder="{{User.name | titlecase}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="{{User.email}}">
+                                        <input #email type="email" class="form-control" name="email" id="email" placeholder="{{User.email}}">
                                     </div>
                                 </div>
-                                <!--div class="form-group">
+                                <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="password"><h4>Password</h4></label>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="password">
+                                        <label for="password"><h4>Contrasena Actual</h4></label>
+                                        <input #pass type="password" class="form-control" name="password" id="password" placeholder="password">
                                     </div>
-                                </div-->
-                                <!--div class="form-group">
-
+                                </div>
+                                <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="password2"><h4>Confirmar Password</h4></label>
-                                        <input type="password" class="form-control" name="password2" id="password2" placeholder="password">
+                                        <label for="password2"><h4>Nueva Contraseña</h4></label>
+                                        <input #confirm type="password" class="form-control" name="password2" id="password2" placeholder="nuevo password">
                                     </div>
-                                </div-->
+                                </div>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <br>
-                                        <button (click)="updateProfile(f)" class="btn btn-lg btn-success" type="submit">
+                                        <button (click)="updateProfile(name,email, pass, confirm)" class="btn btn-lg btn-success" type="submit">
                                                         Actualizar
                                                 <i class="fas fa-sync-alt"></i>
-                                        </button>
-                                        <button (click)="prueba()" class="btn btn-lg btn-success" type="submit">
-                                            Prueba
-                                             <i class="fas fa-sync-alt"></i>
                                         </button>
                                     </div>
                                 </div>

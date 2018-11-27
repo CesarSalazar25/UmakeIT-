@@ -9,44 +9,41 @@
     <ng-template #authenticated>
         <div *ngIf="auth.User | async as User">
 
-                <button type="button" class="btn btn-dark" (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseUser" tooltip="Perfil" placement="right">
+            <button type="button" class="btn btn-dark" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseUser" tooltip="Perfil" placement="right">
                         <i *ngIf="!isCollapsed" class="fas fa-user-slash"></i>
                         <i *ngIf="isCollapsed" class="fas fa-user"></i>
                 </button>
-                <div id="collapseUser" [collapse]="isCollapsed">
-                        <div class="name-user">
-                                <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
-                                <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
-                                <!--Nombre-->
-                                <br>
-                                <b>{{User.name | titlecase}}</b>
-                                <hr>
-                                <!--Rol de usuario-->
-                                <!--Se muestra el rol del usuario con un botón-->
-                                <button *ngIf="User.role === 'admin'" type="button" class="btn btn-dark btn-sm diseabled">
+            <div id="collapseUser" [collapse]="isCollapsed">
+                <div class="name-user">
+                    <img class="img-fluid profile-pic" *ngIf="User.photoUrl" src="{{User.photoUrl}}">
+                    <img class="img-fluid profile-pic" *ngIf="User.photoUrl == null" src="/assets/img/sin-perfil.png">
+                    <!--Nombre-->
+                    <br>
+                    <b>{{User.name | titlecase}}</b>
+                    <hr>
+                    <!--Rol de usuario-->
+                    <!--Se muestra el rol del usuario con un botón-->
+                    <button *ngIf="User.role === 'admin'" type="button" class="btn btn-dark btn-sm diseabled">
                                         <i class="fas fa-user-edit"></i>
                                         <b>  Administrador</b>
                                 </button>
-                                <button *ngIf="User.role === 'customer'" type="button" class="btn btn-dark btn-sm diseabled">
+                    <button *ngIf="User.role === 'customer'" type="button" class="btn btn-dark btn-sm diseabled">
                                         <i class="fas fa-user-tie"></i>
                                         <b>  Cliente</b>
                                 </button>
-                        </div>
                 </div>
+            </div>
             <hr>
 
-            <button type="button" class="btn btn-dark" [routerLink]="['perfil']" routerLinkActive="active"
-            tooltip="Editar perfil" placement="right">
+            <button type="button" class="btn btn-dark" [routerLink]="['perfil']" routerLinkActive="active" tooltip="Editar perfil" placement="right">
                 <i class="fas fa-user-edit"></i>
             </button>
             <br><br>
             <div *ngIf="User.role === 'customer'">
-                    <button type="button" class="btn btn-dark" [routerLink]="['compras']" routerLinkActive="active" 
-                    tooltip="Compras" placement="right">
+                <button type="button" class="btn btn-dark" [routerLink]="['compras']" routerLinkActive="active" tooltip="Compras" placement="right">
                            <i class="fas fa-cart-arrow-down"></i>
                    </button>
-                   <br><br>               
+                <br><br>
             </div>
             <button type="button" class="btn btn-dark" (click)="auth.signOut()" tooltip="Salir" placement="right">
                     <i class="fas fa-sign-out-alt"></i>
@@ -57,4 +54,3 @@
     </ng-template>
 
 </nav>
-

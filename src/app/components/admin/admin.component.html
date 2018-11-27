@@ -64,18 +64,18 @@
 <!--Modal para confirmar la eliminación del producto-->
 <ng-template #Confirmtemplate>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Confirmar acción</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef3.hide()">
+        <h4 class="modal-title pull-left">Confirmar acción</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef3.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      ¿Desea borrar de forma permanente el producto seleccionado?
-      <br><br>
-      <button (click)="delet()" class="btn btn-success" type="button">Sí</button>
-      <button (click)="modalRef3.hide()" class="btn btn-danger btn-cancelar" type="button">No</button>
+        ¿Desea borrar de forma permanente el producto seleccionado?
+        <br><br>
+        <button (click)="delet()" class="btn btn-success" type="button">Sí</button>
+        <button (click)="modalRef3.hide()" class="btn btn-danger btn-cancelar" type="button">No</button>
     </div>
-  </ng-template>
+</ng-template>
 
 
 <!-- Modal para editar el producto -->
@@ -99,27 +99,27 @@
                         <h6>Seleccione una nueva foto</h6>
                         <br>
 
-                    <div class="container">
-                        <!--Barra de progreso-->
-                        <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+                        <div class="container">
+                            <!--Barra de progreso-->
+                            <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
 
-                        <!--Muestra el progreso de la barra-->
-                        <div class="item">
+                            <!--Muestra el progreso de la barra-->
+                            <div class="item">
                                 Progress: {{ (uploadProgress | async) / 100 | percent }}
-                        </div>
-                        <br>
+                            </div>
+                            <br>
 
-                        <!--Se sube una nueva foto para el usuario-->
-                        <div class="item">
-                            <!--Selecciona un archivo .png o .jpg-->
-                            <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg">
-                            <!--Botón para poner en funcionamiento el input-->
-                            <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click()">
+                            <!--Se sube una nueva foto para el usuario-->
+                            <div class="item">
+                                <!--Selecciona un archivo .png o .jpg-->
+                                <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg">
+                                <!--Botón para poner en funcionamiento el input-->
+                                <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click()">
                                 Subir foto
                                 <i class="fas fa-upload"></i>
-                            </button>   
+                            </button>
+                            </div>
                         </div>
-                    </div>
 
                     </div>
                 </div>
@@ -224,28 +224,27 @@
                         <h6>Seleccione la foto para el producto</h6>
                         <br>
 
-                    <div class="container">
-                        <!--Barra de progreso-->
-                        <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+                        <div class="container">
+                            <!--Barra de progreso-->
+                            <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
 
-                        <!--Muestra el progreso de la barra-->
-                        <div class="item">
+                            <!--Muestra el progreso de la barra-->
+                            <div class="item">
                                 Progress: {{ (uploadProgress | async) / 100 | percent }}
-                        </div>
-                        <br>
-                        <button (click)="prueba()">prueba</button>
+                            </div>
+                            <br>
 
-                        <!--Se sube una nueva foto para el usuario-->
-                        <div class="item">
-                            <!--Selecciona un archivo .png o .jpg-->
-                            <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg">
-                            <!--Botón para poner en funcionamiento el input-->
-                            <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click()">
+                            <!--Se sube una nueva foto para el usuario-->
+                            <div class="item">
+                                <!--Selecciona un archivo .png o .jpg-->
+                                <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg">
+                                <!--Botón para poner en funcionamiento el input-->
+                                <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click()">
                                 Subir foto
                                 <i class="fas fa-upload"></i>
-                            </button>   
+                            </button>
+                            </div>
                         </div>
-                    </div>
 
                     </div>
                 </div>

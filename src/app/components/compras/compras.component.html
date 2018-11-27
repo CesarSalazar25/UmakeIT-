@@ -23,6 +23,7 @@
                 <th scope="col">Monto ($)</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Ver Detalle</th>
+                <th scope="col">Comprar</th>
             </tr>
         </thead>
         <tbody *ngIf="orders">
@@ -33,7 +34,6 @@
                     <button class="btn btn-warning" (click)="openModal(template)">
                             <i class="far fa-eye"></i>
                     </button>
-
                     <ng-template #template>
                         <div class="modal-header">
                             <h4 class="modal-title pull-left">Detalles de la Compra</h4>
@@ -61,6 +61,31 @@
                                 <hr>
                             </div>
 
+                        </div>
+                    </ng-template>
+
+                </td>
+                <td>
+                    <button class="btn btn-warning">
+                            <i class="fas fa-cart-arrow-down"(click)="openRecompra(recompra, order)"></i>
+                    </button>
+                    <ng-template #recompra>
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Recomprar</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Esta seguro que quiere volver a comprar esta orden</p>
+                            <div class="row">
+                                <div class="col-sm-6" id="paypal-checkout-btn"></div>
+                                <div class="col-sm-2">
+                                    <button (click)="decline()" type="button" class="btn btn-danger">
+                                        <b>Volver a Orden</b>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </ng-template>
 

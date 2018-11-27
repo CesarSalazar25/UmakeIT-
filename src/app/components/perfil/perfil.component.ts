@@ -7,9 +7,8 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
-import { TouchSequence } from 'selenium-webdriver';
 import { User } from '../../models/user';
-import { ClassGetter } from '@angular/compiler/src/output/output_ast';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-perfil',
@@ -38,25 +37,123 @@ export class PerfilComponent implements OnInit
     this.auth.User.subscribe(user => { this.selectedUser = user });
   }
 
-  updateProfile(form: NgForm)
+  updateProfile(name: HTMLInputElement, email: HTMLInputElement, pass: HTMLInputElement, nuevo: HTMLInputElement)
   {
-
-    if(form.value.name != ""){
-      console.log(form.value.name);
-      this.selectedUser.name = form.value.name;
+    if(pass.value !=""){
+      this.reautenticate(pass.value).then(() => {
+        var user = this.afAuth.auth.currentUser;
+        if(nuevo.value != ""){
+          user.updatePassword(nuevo.value).then(()=> {
+            alert("Password was changed");
+          }).catch((error => {
+            alert(error.message);
+          }));
+        }
+        if(name.value != "" && this.imageUrl != null){
+          var Profile ={
+            displayName: name.value,
+            photoURL: this.imageUrl
+          }
+          user.updateProfile(Profile).then(() => {
+            console.log("Se actualizo el profile");
+            this.selectedUser.name = name.value;
+            this.selectedUser.photoUrl = this.imageUrl;
+            this.auth.updateUserData(this.selectedUser);
+          }).catch((error) => {
+            alert(error.message);
+          })
+        }else if(name.value == "" && this.imageUrl != null){
+          var Profile ={
+            displayName: this.selectedUser.name,
+            photoURL: this.imageUrl
+          }
+          user.updateProfile(Profile).then(() => {
+            console.log("Se actualizo el profile");
+            this.selectedUser.photoUrl = this.imageUrl;
+            this.auth.updateUserData(this.selectedUser);
+          }).catch((error) => {
+            alert(error.message);
+          })
+        }else if(name.value != "" && this.imageUrl == null){
+          var Profile ={
+            displayName: name.value,
+            photoURL: this.selectedUser.photoUrl
+          }
+          user.updateProfile(Profile).then(() => {
+            console.log("Se actualizo el profile");
+            this.selectedUser.name = name.value;
+            this.auth.updateUserData(this.selectedUser);
+          }).catch((error) => {
+            alert(error.message);
+          })
+        }
+        if(email.value != ""){
+          user.updateEmail(email.value).then(()=>{
+            console.log("Se actualizo el email");
+            this.selectedUser.email = email.value;
+            this.auth.updateUserData(this.selectedUser);
+          }).catch((error) => {
+            alert(error.message);
+          })
+        }
+      }).catch((error) => {
+        alert(error.message);
+      });
+    }else{
+      alert("Para realizar cualquier cambio necesita poner su contraseña actual")
+      return; 
     }
 
-    if(this.imageUrl!=null)
-    {
-      this.oldimageUrl=this.selectedUser.photoUrl;
-      this.selectedUser.photoUrl=this.imageUrl;
-      this.deleteImage(this.oldimageUrl);
-      this.imageUrl=null;
-    }
-    console.log(this.selectedUser);
-    this.user.updateUser(this.selectedUser);
+    // if(name.value != ""){
+    //   if(this.imageUrl != null){
+    //     console.log("se hizo update de nombre e imagen")
+    //     user.updateProfile({
+    //       displayName: name.value,
+    //       photoURL: this.imageUrl
+    //     }).then(function() {
+    //       // Update successful.
+    //     }).catch(function(error) {
+    //       // An error happened.
+    //     });
+    //   }else {
+    //     console.log("update de nombre y no imagen")
+    //     user.updateProfile({
+    //       displayName: name.value,
+    //       photoURL: this.selectedUser.photoUrl
+    //     }).then(function() {
+    //       // Update successful.
+    //     }).catch(function(error) {
+    //       // An error happened.
+    //     });
+    //   }
+    // }else {
+    //   if(this.imageUrl != null){
+    //     console.log("update de imagen y no nombre")
+    //     user.updateProfile({
+    //       displayName: this.selectedUser.name,
+    //       photoURL: this.imageUrl
+    //     }).then(function() {
+    //       // Update successful.
+    //     }).catch(function(error) {
+    //       // An error happened.
+    //     });
+    //   }
+    // }
+    // if(nuevo.value != ""){
+    //     console.log(pass.value);
+    //     console.log("update de password");
+    //     user.updatePassword(pass.value);
+    // }
+    // if(email.value != ""){
+    //   user.updateEmail(email.value);
+    // }
+
   }
-
+  reautenticate(pass){
+    var user = this.afAuth.auth.currentUser;
+    var credential = auth.EmailAuthProvider.credential(user.email, pass);
+    return user.reauthenticateWithCredential(credential);
+  }
   upload(event) 
   {
     // Obtiene la imagen:
@@ -88,11 +185,6 @@ export class PerfilComponent implements OnInit
       }).catch( err => {
         // Handle err
     });
-  }
-
-  prueba()
-  {
-    console.log(this.selectedUser);
   }
 
 }

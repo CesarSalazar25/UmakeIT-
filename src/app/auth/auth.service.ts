@@ -12,7 +12,6 @@ import { User } from "../models/user";
 //Observables:
 import {switchMap} from 'rxjs/operators';
 import { Observable , of} from 'rxjs';
-import { UserService } from '../services/user.service';
 
 
 @Injectable()
@@ -78,19 +77,52 @@ export class AuthService {
   }
   
   //Método que actualiza la data del usuario:
-  private updateUserData(user){
+  public updateUserData(user){
     const userRef: AngularFirestoreDocument<User> = this.firestore.doc(`users/${user.uid}`);
-
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      name: user.displayName,
-      photoUrl: user.photoURL
+    if(user.photoUrl == null){
+      if(user.role == "customer"){
+        console.log("photoNula")
+        const data: User = {
+          uid: user.uid,
+          email: user.email,
+          name: user.name,
+          photoUrl: null,
+          role: "customer"
+        }
+        return userRef.set(data);
+      }else{
+        const data: User = {
+          uid: user.uid,
+          email: user.email,
+          name: user.name,
+          photoUrl: null,
+          role: "admin"
+        }
+        return userRef.set(data);
+      }
+    }else{
+      if(user.role == "customer"){
+        console.log("photoNoNulala")
+        const data: User = {
+          uid: user.uid,
+          email: user.email,
+          name: user.name,
+          photoUrl: user.photoUrl,
+          role: "customer"
+      }
+      return userRef.set(data);
+    }else {
+      const data: User = {
+        uid: user.uid,
+        email: user.email,
+        name: user.name,
+        photoUrl: user.photoUrl,
+        role: "admin"
+      }
+      return userRef.set(data);
     }
-
-    return userRef.set(data);
   }
-
+  }
   //Método para iniciar sesión con email y password:
   public emailAndPassword(email, password)
   {

@@ -9,7 +9,7 @@ import { AuthService } from '../../auth/auth.service';
 export class SidebarComponent implements OnInit {
 
   constructor(public auth: AuthService) { }
-
+  isCollapsed = false;
   ngOnInit() {
   }
 
